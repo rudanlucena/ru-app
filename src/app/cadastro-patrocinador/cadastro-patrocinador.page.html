@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Novo Patrocinador</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <a md-raised-button color="primary" (click)="fileInput.click()">
+    <img *ngIf="!isFoto" src="/assets/arena.jpg">
+    <img *ngIf="isFoto" src="{{foto}}">
+  </a>
+
+  <form #form="ngForm" (ngSubmit)="adicionarPatrocinador()">
+    <ion-list lines="none">
+      <ion-list-header>
+        <ion-label>Adicione um novo patrocinador de sua equipe</ion-label>
+      </ion-list-header>
+      <ion-input [(ngModel)]="patrocinador.img" required name="img" type="file" #fileInput (change)="onFileChanged($event)">
+      </ion-input>
+      <ion-item>
+        <ion-icon slot="start" color="medium" name="logo-usd"></ion-icon>
+        <ion-input maxlength="100" [(ngModel)]="patrocinador.nome" name="nome" placeholder="Nome Patrocinador" required></ion-input>
+      </ion-item>
+
+      <ion-button expand="block" type="submit" [disabled]="form.invalid">
+        <ion-icon name="save"></ion-icon>Salvar
+      </ion-button>
+    </ion-list>
+  </form>
+</ion-content>

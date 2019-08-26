@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>cadastrar Jogo</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form #form="ngForm" (ngSubmit)="adicionarConfronto()">
+    <ion-list lines="none">
+      <ion-item>
+        <ion-icon slot="start" color="medium" name="shirt"></ion-icon>
+        <ion-input maxlength="100" required [(ngModel)]="confronto.adversario" name="adversario" placeholder="Adiversario"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-icon slot="start" color="medium" name="pin"></ion-icon>
+        <ion-input maxlength="100" required [(ngModel)]="confronto.local" name="local" placeholder="estadio"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>MM DD YY</ion-label>
+        <ion-datetime required [(ngModel)]="confronto.data" name="data" displayFormat="DD MM YY" placeholder="Select Date">
+        </ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label>HH:mm</ion-label>
+        <ion-datetime required [(ngModel)]="confronto.hora" name="hora" displayFormat="HH:mm"></ion-datetime>
+      </ion-item>
+
+      <ion-list-header>
+        <ion-label>* Caso a partida ja tenha sido finalizada informe o resultado</ion-label>
+      </ion-list-header>
+      <ion-item>
+        <ion-icon slot="start" color="medium" name="football"></ion-icon>
+        <ion-input maxlength="6" [(ngModel)]="confronto.placarClube" name="placarClube" placeholder="Placar da sua equipe"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-icon slot="start" color="medium" name="football"></ion-icon>
+        <ion-input maxlength="6" [(ngModel)]="confronto.placarAdiversario" name="placarAdiversario" placeholder="Placar adiversario"></ion-input>
+      </ion-item>
+
+
+      <ion-button expand="block" type="submit" [disabled]="form.invalid">
+        <ion-icon name="save"></ion-icon>Salvar
+      </ion-button>
+    </ion-list>
+  </form>
+</ion-content>

@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Nova Noticia</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+    <a md-raised-button color="primary" (click)="fileInput.click()">
+        <img *ngIf="!isFoto" src="/assets/arena.jpg">
+        <img *ngIf="isFoto" src="{{foto}}">
+    </a>
+    <form #form="ngForm" (ngSubmit)="adicionarNoticia()">
+    <ion-input [(ngModel)]="noticia.img" name="img" required  type="file" name="img" #fileInput (change)="onFileChanged($event)"></ion-input>
+
+  <ion-list lines="none">
+    <ion-list-header>
+      <ion-label>Adicione uma nova noticia da sua equipe</ion-label>
+    </ion-list-header>
+    <ion-item>
+      <ion-input maxlength="200" required [(ngModel)]="noticia.titulo" name="titulo" placeholder="Titulo"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-textarea maxlength="5000" required rows="6" [(ngModel)]="noticia.texto" name="texto" placeholder="Texto"></ion-textarea>
+      
+    </ion-item>
+    <ion-button expand="block" type="submit" [disabled]="form.invalid">
+      <ion-icon name="save"></ion-icon>Salvar 
+    </ion-button>
+  </ion-list>
+  </form>
+
+</ion-content>

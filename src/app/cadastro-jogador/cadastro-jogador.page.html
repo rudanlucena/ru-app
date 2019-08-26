@@ -1,0 +1,87 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Novo Jogador</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <form onsubmit="processForm(event)">
+    <ion-list lines="full" class="ion-no-margin ion-no-padding">
+        <ion-item>
+            <ion-label>Posição</ion-label>
+            <ion-select ok-text="OK" cancel-text="Sair">
+              <ion-select-option value="dos">Atacante</ion-select-option>
+              <ion-select-option value="lunix">Meio Campo</ion-select-option>
+              <ion-select-option value="mac7">Lateral Esquerdo</ion-select-option>
+              <ion-select-option value="mac8">Lateral Direito</ion-select-option>
+              <ion-select-option value="win3.1">Volante</ion-select-option>
+              <ion-select-option value="win95">Centro Avante</ion-select-option>
+              <ion-select-option value="win98">Goleiro</ion-select-option>
+            </ion-select>
+          </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Login <ion-text color="danger">*</ion-text>
+        </ion-label>
+        <ion-input required type="text" oninput="handleFirstNameValue(event)"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Senha <ion-text color="danger">*</ion-text>
+        </ion-label>
+        <ion-input required type="password" oninput="handleLastNameValue(event)"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Repetir Senha <ion-text color="danger">*</ion-text>
+        </ion-label>
+        <ion-input required type="password" oninput="handleLastNameValue(event)"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Nome Camisa<ion-text color="danger">*</ion-text>
+        </ion-label>
+        <ion-input required type="text" oninput="handleLastNameValue(event)"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">CEP <ion-text color="danger">*</ion-text>
+        </ion-label>
+        <ion-input required type="text" oninput="handleLastNameValue(event)"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Estado <ion-text color="danger">*</ion-text>
+        </ion-label>
+        <ion-input required type="text" oninput="handleLastNameValue(event)"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Cidade <ion-text color="danger">*</ion-text>
+        </ion-label>
+        <ion-input required type="text" oninput="handleLastNameValue(event)"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Peso (kg)<ion-text color="danger"></ion-text>
+        </ion-label>
+        <ion-input type="numer" oninput="handleLastNameValue(event)"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Altura (cm)<ion-text color="danger"></ion-text>
+        </ion-label>
+        <ion-input type="number" oninput="handleLastNameValue(event)"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Idade <ion-text color="danger"></ion-text>
+        </ion-label>
+        <ion-input type="number" oninput="handleLastNameValue(event)"></ion-input>
+      </ion-item>
+
+
+    </ion-list>
+
+    <div class="ion-padding">
+      <ion-button expand="block" type="submit" class="ion-no-margin">Criar Conta</ion-button>
+    </div>
+  </form>
+</ion-content>

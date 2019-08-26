@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-title>login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content fullscreen>
+  
+  <form #form="ngForm" (ngSubmit)="logar()">
+      <ion-list>
+          <ion-radio-group [(ngModel)]="modo" name="modo" required>        
+            <ion-item>
+              <ion-label>Gerenciar Minha equipe</ion-label>
+              <ion-radio slot="start" value="treinador" checked></ion-radio>
+            </ion-item>
+        
+            <ion-item>
+              <ion-label>Gerenciar meu Campeonato</ion-label>
+              <ion-radio slot="start" value="organizador"></ion-radio>
+            </ion-item>
+      
+          </ion-radio-group>
+        </ion-list>
+
+    <ion-list lines="full" class="ion-no-margin ion-no-padding">
+      <ion-item>
+        <ion-label position="stacked">Login <ion-text color="danger">*</ion-text>
+        </ion-label>
+        <ion-input [(ngModel)]="login" name="loginClube" required type="text"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Senha <ion-text color="danger">*</ion-text>
+        </ion-label>
+        <ion-input [(ngModel)]="senha" name="senha" required type="password"></ion-input>
+      </ion-item>
+    </ion-list>
+
+    <div class="ion-padding">
+      <ion-button expand="block" [disabled]="form.invalid" type="submit" class="ion-no-margin">Entrar</ion-button>
+    </div>
+  </form>
+
+  <div class="ion-padding">
+    <ion-button [routerLink]="['/cadastro-clube']" routerLinkActive="router-link-active" expand="full" color="success">
+      Cadastrar uma nova equipe</ion-button>
+  </div>
+
+  <div class="ion-padding">
+    <ion-button disabled [routerLink]="['/cadastro-campeonato']" routerLinkActive="router-link-active" expand="full"
+      color="success">
+      Cadastrar Campeonato</ion-button>
+  </div>
+</ion-content>

@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{campeonato.nome}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-list>
+    <ion-list-header>
+      <h2>Noticias</h2>
+      <ion-fab-button *ngIf="campeonato.id==idRoot" (click)="adicionarNoticia()">
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </ion-list-header>
+    <ion-card *ngFor="let noticia of noticias">
+      <img src="{{noticia.img}}" />
+      <ion-card-header>
+        <ion-card-title>{{noticia.titulo}} <ion-icon color="danger" name="trash" (click)="removerNoticia(noticia.id)">
+          </ion-icon>
+        </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        {{noticia.texto}}
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+
+
+  <ion-list>
+    <ion-list-header>
+      <h2>Tabela de Jogos</h2>
+      <ion-fab-button *ngIf="campeonato.id==idRoot" (click)="adicionarConfronto()">
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </ion-list-header>
+    <ion-item *ngFor="let confronto of confrontos">
+      <ion-label>
+        <ion-badge color="success" slot="end">{{confronto.data | date: 'dd/MM/yyyy'}} {{confronto.hora | date: 'HH:mm'}}
+        </ion-badge>
+        <h2><b>{{clube.nome}} {{confronto.placarClube}} x {{confronto.placarAdiversario}} {{confronto.adversario}}
+            <ion-icon color="danger" name="trash" (click)="removerConfronto(confronto.id)"></ion-icon></b></h2>
+        <h3>São Januario</h3>
+      </ion-label>
+
+    </ion-item>
+  </ion-list>
+
+
+
+
+
+
+
+</ion-content>

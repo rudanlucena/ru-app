@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  //host: 'https://arena-league-api.herokuapp.com/'
+  host:  'http://localhost:9999/'
 };
 
 /*

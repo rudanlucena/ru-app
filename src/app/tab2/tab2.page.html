@@ -1,9 +1,516 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>
-      Tab Two
-    </ion-title>
+  <ion-toolbar color="dark">
+      <ion-title>{{campeonato.nome}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content></ion-content>
+<ion-content>
+
+    <ion-list *ngIf="showleague">
+        <ion-list-header>
+          <h2>Noticias</h2>
+          <ion-fab-button *ngIf="campeonato.id==idCampeonatoRoot" (click)="adicionarNoticia()">
+            <ion-icon name="add"></ion-icon>
+          </ion-fab-button>
+        </ion-list-header>
+        <ion-card *ngFor="let noticia of noticias">
+          <img src="{{noticia.img}}" />
+          <ion-card-header>
+            <ion-card-title>{{noticia.titulo}} <ion-icon *ngIf="campeonato.id==idCampeonatoRoot" color="danger" name="trash" (click)="removerNoticia(noticia.id)">
+              </ion-icon>
+            </ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            {{noticia.texto}}
+          </ion-card-content>
+        </ion-card>
+      </ion-list>
+    
+    
+      <ion-list *ngIf="showleague">
+        <ion-list-header>
+          <h2>Tabela de Jogos</h2>
+          <ion-fab-button *ngIf="campeonato.id==idCampeonatoRoot" (click)="adicionarConfronto()">
+            <ion-icon name="add"></ion-icon>
+          </ion-fab-button>
+        </ion-list-header>
+        <ion-item *ngFor="let confronto of confrontos">
+          <ion-label>
+              <ion-badge color="success" slot="end">{{confronto.data | date: 'dd/MM/yyyy'}} {{confronto.hora | date: 'HH:mm'}}
+                </ion-badge>
+            <h2><b>{{clube.nome}} {{confronto.placarClube}} x {{confronto.placarAdiversario}} {{confronto.adversario}}
+                <ion-icon *ngIf="campeonato.id==idCampeonatoRoot" color="danger" name="trash" (click)="removerConfronto(confronto.id)"></ion-icon></b></h2>
+            <h3>São Januario</h3>
+          </ion-label>
+    
+        </ion-item>
+      </ion-list>
+
+
+      <ion-fab *ngIf="campeonato.id==idCampeonatoRoot" horizontal="start" vertical="bottom" slot="fixed">
+          <ion-fab-button color="dark">
+            <ion-icon name="settings"></ion-icon>
+          </ion-fab-button>
+          <ion-fab-list side="top">
+            <ion-fab-button color="danger" (click)="presentAlertConfirm()">
+              <ion-icon name="trash"></ion-icon>
+            </ion-fab-button>
+            <ion-fab-button color="primary" (click)="sair()">
+              <ion-icon name="log-out"></ion-icon>
+            </ion-fab-button>
+          </ion-fab-list>
+        </ion-fab>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+  <ion-card>
+    <img src="./assets/inicioRodada.jpg" />
+    <ion-card-header>
+      <ion-card-title>Inicio de campeonato</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      A atual campeã Macela da inicio ao campeonato Mauritiense 2019 contra a equipe do Anauá. A partida acontecerá no
+      dia 26/08 com horario previsto as 19:00H . Esse jogo é valido pelo grupo B
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <img src="./assets/inicioCampeonato.jpg" />
+    <ion-card-header>
+      <ion-card-title>Grupos Definidos</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      Organização do campeonato Mauritiense 2019 define os grupos e data de inicio desta edição.
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <img src="./assets/googlePlay.jpg" />
+    <ion-card-header>
+      <ion-card-title>Atualizações</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      Mantenha seu aplicativo atualizado e acompanhe as competições da sua cidade!
+    </ion-card-content>
+  </ion-card>
+
+
+
+
+  <ion-list>
+    <ion-item color="success">
+      <ion-label>
+        <h2>
+          Jogos Da Rodada
+        </h2>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <h2><b>Macela x Anauá</b></h2>
+        <h3>Valderir Carvalho</h3>
+      </ion-label>
+      <ion-badge color="success" slot="end">26/08 19:00</ion-badge>
+    </ion-item>
+
+  </ion-list>
+
+
+  <ion-list>
+    <ion-item color="primary">
+      <ion-label>
+        <h2>Grupo A </h2>
+      </ion-label>
+      <ion-badge color="primary" slot="end">PTS V E D</ion-badge>
+    </ion-item>
+
+    <ion-item>
+      <ion-avatar slot="start">
+        <img src="./assets/escudo.png" class="img-responsive">
+      </ion-avatar>
+      <ion-label>
+        <h2>Panasco </h2>
+      </ion-label>
+      <ion-badge color="primary" slot="end">0 - 0 - 0 - 0</ion-badge>
+    </ion-item>
+
+    <ion-item>
+      <ion-avatar slot="start">
+        <img src="./assets/escudo.png" class="img-responsive">
+      </ion-avatar>
+      <ion-label>
+        <h2>Alto Vermelho </h2>
+      </ion-label>
+      <ion-badge color="primary" slot="end">0 - 0 - 0 - 0</ion-badge>
+    </ion-item>
+
+    <ion-item>
+      <ion-avatar slot="start">
+        <img src="./assets/escudo.png" class="img-responsive">
+      </ion-avatar>
+      <ion-label>
+        <h2>Nova Barcelona </h2>
+      </ion-label>
+      <ion-badge color="primary" slot="end">0 - 0 - 0 - 0</ion-badge>
+    </ion-item>
+  </ion-list>
+
+
+
+  <ion-list>
+    <ion-item color="primary">
+      <ion-label>
+        <h2>Grupo B </h2>
+      </ion-label>
+      <ion-badge color="primary" slot="end">PTS V E D</ion-badge>
+    </ion-item>
+
+    <ion-item>
+      <ion-avatar slot="start">
+        <img src="./assets/escudo.png" class="img-responsive">
+      </ion-avatar>
+      <ion-label>
+        <h2>Macela </h2>
+      </ion-label>
+      <ion-badge color="primary" slot="end">0 - 0 - 0 - 0</ion-badge>
+    </ion-item>
+
+    <ion-item>
+      <ion-avatar slot="start">
+        <img src="./assets/escudo.png" class="img-responsive">
+      </ion-avatar>
+      <ion-label>
+        <h2>Anauá </h2>
+      </ion-label>
+      <ion-badge color="primary" slot="end">0 - 0 - 0 - 0</ion-badge>
+    </ion-item>
+
+    <ion-item>
+      <ion-avatar slot="start">
+        <img src="./assets/escudo.png" class="img-responsive">
+      </ion-avatar>
+      <ion-label>
+        <h2>Olho d'agua </h2>
+      </ion-label>
+      <ion-badge color="primary" slot="end">0 - 0 - 0 - 0</ion-badge>
+    </ion-item>
+  </ion-list>
+
+
+
+
+  <ion-list>
+    <ion-item color="primary">
+      <ion-label>
+        <h2>Grupo C </h2>
+      </ion-label>
+      <ion-badge color="primary" slot="end">PTS V E D</ion-badge>
+    </ion-item>
+
+    <ion-item>
+      <ion-avatar slot="start">
+        <img src="./assets/escudo.png" class="img-responsive">
+      </ion-avatar>
+      <ion-label>
+        <h2>Parmalat </h2>
+      </ion-label>
+      <ion-badge color="primary" slot="end">0 - 0 - 0 - 0</ion-badge>
+    </ion-item>
+
+    <ion-item>
+      <ion-avatar slot="start">
+        <img src="./assets/escudo.png" class="img-responsive">
+      </ion-avatar>
+      <ion-label>
+        <h2>Quixabinha </h2>
+      </ion-label>
+      <ion-badge color="primary" slot="end">0 - 0 - 0 - 0</ion-badge>
+    </ion-item>
+
+    <ion-item>
+      <ion-avatar slot="start">
+        <img src="./assets/escudo.png" class="img-responsive">
+      </ion-avatar>
+      <ion-label>
+        <h2>Paissandu</h2>
+      </ion-label>
+      <ion-badge color="primary" slot="end">0 - 0 - 0 - 0</ion-badge>
+    </ion-item>
+  </ion-list>
+
+  <ion-list>
+    <ion-item color="primary">
+      <ion-label>
+        <h2>Grupo D </h2>
+      </ion-label>
+      <ion-badge color="primary" slot="end">PTS V E D</ion-badge>
+    </ion-item>
+
+    <ion-item>
+      <ion-avatar slot="start">
+        <img src="./assets/escudo.png" class="img-responsive">
+      </ion-avatar>
+      <ion-label>
+        <h2>Borussia </h2>
+      </ion-label>
+      <ion-badge color="primary" slot="end">0 - 0 - 0 - 0</ion-badge>
+    </ion-item>
+
+    <ion-item>
+      <ion-avatar slot="start">
+        <img src="./assets/escudo.png" class="img-responsive">
+      </ion-avatar>
+      <ion-label>
+        <h2>Leão </h2>
+      </ion-label>
+      <ion-badge color="primary" slot="end">0 - 0 - 0 - 0</ion-badge>
+    </ion-item>
+
+    <ion-item>
+      <ion-avatar slot="start">
+        <img src="./assets/escudo.png" class="img-responsive">
+      </ion-avatar>
+      <ion-label>
+        <h2>Benjamin </h2>
+      </ion-label>
+      <ion-badge color="primary" slot="end">0 - 0 - 0 - 0</ion-badge>
+    </ion-item>
+  </ion-list>
+
+  <ion-list>
+    <ion-item color="primary">
+      <ion-label>
+        <h2>Grupo E </h2>
+      </ion-label>
+      <ion-badge color="primary" slot="end">PTS V E D</ion-badge>
+    </ion-item>
+
+    <ion-item>
+      <ion-avatar slot="start">
+        <img src="./assets/escudo.png" class="img-responsive">
+      </ion-avatar>
+      <ion-label>
+        <h2>Sociedade </h2>
+      </ion-label>
+      <ion-badge color="primary" slot="end">0 - 0 - 0 - 0</ion-badge>
+    </ion-item>
+
+    <ion-item>
+      <ion-avatar slot="start">
+        <img src="./assets/escudo.png" class="img-responsive">
+      </ion-avatar>
+      <ion-label>
+        <h2>Umburanas </h2>
+      </ion-label>
+      <ion-badge color="primary" slot="end">0 - 0 - 0 - 0</ion-badge>
+    </ion-item>
+
+    <ion-item>
+      <ion-avatar slot="start">
+        <img src="./assets/escudo.png" class="img-responsive">
+      </ion-avatar>
+      <ion-label>
+        <h2>Barrosão </h2>
+      </ion-label>
+      <ion-badge color="primary" slot="end">0 - 0 - 0 - 0</ion-badge>
+    </ion-item>
+  </ion-list>
+
+  <ion-list>
+    <ion-item color="primary">
+      <ion-label>
+        <h2>Grupo F </h2>
+      </ion-label>
+      <ion-badge color="primary" slot="end">PTS V E D</ion-badge>
+    </ion-item>
+
+    <ion-item>
+      <ion-avatar slot="start">
+        <img src="./assets/escudo.png" class="img-responsive">
+      </ion-avatar>
+      <ion-label>
+        <h2>Valência </h2>
+      </ion-label>
+      <ion-badge color="primary" slot="end">0 - 0 - 0 - 0</ion-badge>
+    </ion-item>
+
+    <ion-item>
+      <ion-avatar slot="start">
+        <img src="./assets/escudo.png" class="img-responsive">
+      </ion-avatar>
+      <ion-label>
+        <h2>Vila Nova </h2>
+      </ion-label>
+      <ion-badge color="primary" slot="end">0 - 0 - 0 - 0</ion-badge>
+    </ion-item>
+
+    <ion-item>
+      <ion-avatar slot="start">
+        <img src="./assets/escudo.png" class="img-responsive">
+      </ion-avatar>
+      <ion-label>
+        <h2>Cruzeiro do Saco </h2>
+      </ion-label>
+      <ion-badge color="primary" slot="end">0 - 0 - 0 - 0</ion-badge>
+    </ion-item>
+  </ion-list>
+
+  <ion-list>
+    <ion-item color="primary">
+      <ion-label>
+        <h2>Grupo G </h2>
+      </ion-label>
+      <ion-badge color="primary" slot="end">PTS V E D</ion-badge>
+    </ion-item>
+
+    <ion-item>
+      <ion-avatar slot="start">
+        <img src="./assets/escudo.png" class="img-responsive">
+      </ion-avatar>
+      <ion-label>
+        <h2>Marechal </h2>
+      </ion-label>
+      <ion-badge color="primary" slot="end">0 - 0 - 0 - 0</ion-badge>
+    </ion-item>
+
+    <ion-item>
+      <ion-avatar slot="start">
+        <img src="./assets/escudo.png" class="img-responsive">
+      </ion-avatar>
+      <ion-label>
+        <h2>Lobo </h2>
+      </ion-label>
+      <ion-badge color="primary" slot="end">0 - 0 - 0 - 0</ion-badge>
+    </ion-item>
+
+    <ion-item>
+      <ion-avatar slot="start">
+        <img src="./assets/escudo.png" class="img-responsive">
+      </ion-avatar>
+      <ion-label>
+        <h2>Novo Horizonte </h2>
+      </ion-label>
+      <ion-badge color="primary" slot="end">0 - 0 - 0 - 0</ion-badge>
+    </ion-item>
+  </ion-list>
+
+  <ion-list>
+    <ion-item color="primary">
+      <ion-label>
+        <h2>Grupo H </h2>
+      </ion-label>
+      <ion-badge color="primary" slot="end">PTS V E D</ion-badge>
+    </ion-item>
+
+
+
+    <ion-item>
+      <ion-avatar slot="start">
+        <img src="./assets/escudo.png" class="img-responsive">
+      </ion-avatar>
+      <ion-label>
+        <h2>Pantera </h2>
+      </ion-label>
+      <ion-badge color="primary" slot="end">0 - 0 - 0 - 0</ion-badge>
+    </ion-item>
+
+    <ion-item>
+      <ion-avatar slot="start">
+        <img src="./assets/escudo.png" class="img-responsive">
+      </ion-avatar>
+      <ion-label>
+        <h2>Euro </h2>
+      </ion-label>
+      <ion-badge color="primary" slot="end">0 - 0 - 0 - 0</ion-badge>
+    </ion-item>
+
+    <ion-item>
+      <ion-avatar slot="start">
+        <img src="./assets/escudo.png" class="img-responsive">
+      </ion-avatar>
+      <ion-label>
+        <h2>Flamenguinho </h2>
+      </ion-label>
+      <ion-badge color="primary" slot="end">0 - 0 - 0 - 0</ion-badge>
+    </ion-item>
+  </ion-list>
+
+  <ion-item color="medium">
+    <ion-label>
+      <h2>
+        Artilheiros
+      </h2>
+    </ion-label>
+  </ion-item>
+
+  <ion-list>
+    <ion-item color="medium">
+      <ion-label>
+        <h2>
+          Artilheiros
+        </h2>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-avatar slot="start">
+        <img src="./assets/player.png" class="img-responsive">
+      </ion-avatar>
+      <ion-label>
+        <h2>Rudan </h2>
+        <h3>10 - Macela FC</h3>
+      </ion-label>
+      <ion-badge color="dark" slot="end">9</ion-badge>
+    </ion-item>
+
+    <ion-item>
+      <ion-avatar slot="start">
+        <img src="./assets/player.png" class="img-responsive">
+      </ion-avatar>
+      <ion-label>
+        <h2>Ronaldinho Gaucho </h2>
+        <h3>10 - Macela FC</h3>
+      </ion-label>
+      <ion-badge color="dark" slot="end">8</ion-badge>
+    </ion-item>
+
+    <ion-item>
+      <ion-avatar slot="start">
+        <img src="./assets/player.png" class="img-responsive">
+      </ion-avatar>
+      <ion-label>
+        <h2>Rudan </h2>
+        <h3>10 - Macela FC</h3>
+      </ion-label>
+      <ion-badge color="dark" slot="end">9</ion-badge>
+    </ion-item>
+
+    <ion-item>
+      <ion-avatar slot="start">
+        <img src="./assets/player.png" class="img-responsive">
+      </ion-avatar>
+      <ion-label>
+        <h2>Rudan </h2>
+        <h3>10 - Macela FC</h3>
+      </ion-label>
+      <ion-badge color="dark" slot="end">9</ion-badge>
+    </ion-item>
+  </ion-list>-->
+</ion-content>

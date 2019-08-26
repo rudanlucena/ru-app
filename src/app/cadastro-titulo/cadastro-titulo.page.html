@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Adicionar Titulo</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card class="welcome-card">
+    <ion-card-header>
+      <ion-card-title>Um grande Time é formado por grandes conquistas</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p>Cadastre os principais titulos da sua equipe, Taças devem ser registradas e compartilhadas </p>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-list lines="none">
+    <ion-list-header>
+      <ion-label>Informe o Titulo e o ano</ion-label>
+    </ion-list-header>
+    <form #form="ngForm" (ngSubmit)="adicionarTitulo()">
+    <ion-item>
+      <ion-icon slot="start" color="medium" name="trophy"></ion-icon>
+      <ion-input maxlength="100" [(ngModel)]="titulo.campeonato" name="campeonato" placeholder="Titulo" required></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-icon slot="start" color="medium" name="calendar"></ion-icon>
+        <ion-input type="number" [(ngModel)]="titulo.ano" name="ano" placeholder="Ano" required></ion-input>
+      </ion-item>
+      <ion-button expand="block" type="submit" [disabled]="form.invalid"><ion-icon name="save"></ion-icon> Salvar</ion-button>
+    </form>
+    </ion-list>
+
+</ion-content>

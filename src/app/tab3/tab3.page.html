@@ -1,9 +1,21 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="dark">
     <ion-title>
-      Tab Three
+      Times
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content></ion-content>
+<ion-content>
+
+  <ion-list >
+    <ion-item *ngFor="let clube of clubes" [routerLink]="['/time/'+clube.id]" routerLinkActive="router-link-active" >
+      <ion-avatar slot="start">
+        <img src="./assets/escudo.png" class="img-responsive">
+      </ion-avatar>
+      <ion-label>
+        <h2>{{clube.nome}}</h2>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

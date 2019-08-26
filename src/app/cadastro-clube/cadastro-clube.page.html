@@ -1,0 +1,84 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Novo Clube</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <a md-raised-button color="primary" (click)="fileInput.click()">
+    <img *ngIf="!isFoto" src="/assets/arena.jpg">
+    <img *ngIf="isFoto" src="{{foto}}">
+  </a>
+
+
+  <form #form="ngForm" (ngSubmit)="salvarClube()">
+    <ion-list lines="full" class="ion-no-margin ion-no-padding">
+      <ion-input [(ngModel)]="clube.img" name="img" required type="file" #fileInput (change)="onFileChanged($event)">
+      </ion-input>
+      <ion-item>
+        <ion-label position="stacked">Nome Clube<ion-text color="danger">*</ion-text>
+        </ion-label>
+        <ion-input maxlength="100" [(ngModel)]="clube.nome" name="nomeClube" type="text" required></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Genero</ion-label>
+        <ion-select [(ngModel)]="clube.genero" name="genero" ok-text="Okay" required cancel-text="Nah">
+          <ion-select-option value="masculino">Masculino</ion-select-option>
+          <ion-select-option value="feminino">Feminino</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Modalidade</ion-label>
+        <ion-select [(ngModel)]="clube.modalidade" name="modalidade" ok-text="Okay" required cancel-text="Nah">
+          <ion-select-option value="campo">Futebol de Campo</ion-select-option>
+          <ion-select-option value="futsal">Futsal</ion-select-option>
+          <ion-select-option value="society">Society</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+
+
+      <ion-item>
+        <ion-label position="stacked">CEP <ion-text color="danger">*</ion-text>
+        </ion-label>
+        <ion-input [(ngModel)]="clube.cep" name="cep" (change)="getLocalidade()" required type="number"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Estado <ion-text color="danger">*</ion-text>
+        </ion-label>
+        <ion-input [(ngModel)]="clube.estado" name="estado" required disabled type="text"
+          oninput="handleLastNameValue(event)"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Cidade <ion-text color="danger">*</ion-text>
+        </ion-label>
+        <ion-input [(ngModel)]="clube.cidade" name="cidade" required disabled type="text"
+          oninput="handleLastNameValue(event)">
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Login <ion-text color="danger">*</ion-text>
+        </ion-label>
+        <ion-input maxlength="25" [(ngModel)]="clube.login" name="login" required type="text"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Senha <ion-text color="danger">*</ion-text>
+        </ion-label>
+        <ion-input maxlength="25" minlength="6" [(ngModel)]="clube.senha" name="senha" required type="password">
+        </ion-input>
+      </ion-item>
+
+    </ion-list>
+
+    <div class="ion-padding">
+      <ion-button type="submit" [disabled]="form.invalid" expand="block" class="ion-no-margin">Criar Conta</ion-button>
+    </div>
+  </form>
+</ion-content>
