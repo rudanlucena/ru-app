@@ -14,7 +14,7 @@
     </ion-card-header>
     <ion-card-content>
       <p>Quer divulgar seu campeonato de forma pratica? quer ficar por dentro dos campeonatos da sua cidade?. O Arena
-        League é o app perfeito pra você! </p>
+        MilGrau é o app perfeito pra você! </p>
     </ion-card-content>
   </ion-card>
 
@@ -26,9 +26,13 @@
       <ion-icon slot="start" color="medium" name="pin"></ion-icon>
       <ion-input [(ngModel)]="cep" (change)="buscarCampeonatos()" placeholder="CEP"></ion-input>
     </ion-item>
+    <ion-item *ngIf="showSpinner">
+        <ion-label>Buscando Campeonatos..</ion-label>
+        <ion-spinner></ion-spinner>
+      </ion-item>
     <ion-item disabled="{{selectDisabled}}">
-      <ion-label>Campeonatos</ion-label>
-      <ion-select  [(ngModel)]="idCampeonato" value="notifications" interface="action-sheet"
+      <ion-label>Selecionar Campeonato</ion-label>
+      <ion-select #select1  [(ngModel)]="idCampeonato" value="notifications" interface="action-sheet"
         (ionChange)="selecionarCampeonato()">
         
           <ion-select-option *ngFor="let campeonato of campeonatos" value="{{campeonato.id}}">{{campeonato.nome}}</ion-select-option>

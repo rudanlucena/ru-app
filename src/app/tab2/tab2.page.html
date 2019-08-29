@@ -1,69 +1,133 @@
 <ion-header>
   <ion-toolbar color="dark">
-      <ion-title>{{campeonato.nome}}</ion-title>
+    <ion-title>{{campeonato.nome}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
-    <ion-list *ngIf="showleague">
-        <ion-list-header>
-          <h2>Noticias</h2>
-          <ion-fab-button *ngIf="campeonato.id==idCampeonatoRoot" (click)="adicionarNoticia()">
-            <ion-icon name="add"></ion-icon>
-          </ion-fab-button>
-        </ion-list-header>
-        <ion-card *ngFor="let noticia of noticias">
-          <img src="{{noticia.img}}" />
-          <ion-card-header>
-            <ion-card-title>{{noticia.titulo}} <ion-icon *ngIf="campeonato.id==idCampeonatoRoot" color="danger" name="trash" (click)="removerNoticia(noticia.id)">
-              </ion-icon>
-            </ion-card-title>
-          </ion-card-header>
-          <ion-card-content>
-            {{noticia.texto}}
-          </ion-card-content>
-        </ion-card>
-      </ion-list>
-    
-    
-      <ion-list *ngIf="showleague">
-        <ion-list-header>
-          <h2>Tabela de Jogos</h2>
-          <ion-fab-button *ngIf="campeonato.id==idCampeonatoRoot" (click)="adicionarConfronto()">
-            <ion-icon name="add"></ion-icon>
-          </ion-fab-button>
-        </ion-list-header>
-        <ion-item *ngFor="let confronto of confrontos">
+  <!-- Skeleton screen -->
+
+
+
+  <ion-list *ngIf="showleague">
+    <ion-list-header>
+      <h2>Noticias</h2>
+      <ion-fab-button *ngIf="campeonato.id==idCampeonatoRoot" (click)="adicionarNoticia()">
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </ion-list-header>
+
+
+
+    <div *ngIf="carregandoNoticias">
+      <ion-list>
+        <ion-item>
+          <ion-thumbnail slot="start">
+            <ion-skeleton-text animated></ion-skeleton-text>
+          </ion-thumbnail>
           <ion-label>
-              <ion-badge color="success" slot="end">{{confronto.data | date: 'dd/MM/yyyy'}} {{confronto.hora | date: 'HH:mm'}}
-                </ion-badge>
-            <h2><b>{{clube.nome}} {{confronto.placarClube}} x {{confronto.placarAdiversario}} {{confronto.adversario}}
-                <ion-icon *ngIf="campeonato.id==idCampeonatoRoot" color="danger" name="trash" (click)="removerConfronto(confronto.id)"></ion-icon></b></h2>
-            <h3>São Januario</h3>
+            <h3>
+              <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+            </h3>
+            <p>
+              <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+            </p>
+            <p>
+              <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+            </p>
           </ion-label>
-    
         </ion-item>
+
+        <ion-item>
+          <ion-thumbnail slot="start">
+            <ion-skeleton-text animated></ion-skeleton-text>
+          </ion-thumbnail>
+          <ion-label>
+            <h3>
+              <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+            </h3>
+            <p>
+              <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+            </p>
+            <p>
+              <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+            </p>
+          </ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-thumbnail slot="start">
+            <ion-skeleton-text animated></ion-skeleton-text>
+          </ion-thumbnail>
+          <ion-label>
+            <h3>
+              <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+            </h3>
+            <p>
+              <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+            </p>
+            <p>
+              <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+            </p>
+          </ion-label>
+        </ion-item>
+
       </ion-list>
-
-
-      <ion-fab *ngIf="campeonato.id==idCampeonatoRoot" horizontal="start" vertical="bottom" slot="fixed">
-          <ion-fab-button color="dark">
-            <ion-icon name="settings"></ion-icon>
-          </ion-fab-button>
-          <ion-fab-list side="top">
-            <ion-fab-button color="danger" (click)="presentAlertConfirm()">
-              <ion-icon name="trash"></ion-icon>
-            </ion-fab-button>
-            <ion-fab-button color="primary" (click)="sair()">
-              <ion-icon name="log-out"></ion-icon>
-            </ion-fab-button>
-          </ion-fab-list>
-        </ion-fab>
+    </div>
 
 
 
 
+    <ion-card *ngFor="let noticia of noticias">
+      <img src="{{noticia.img}}" />
+      <ion-card-header>
+        <ion-card-title>{{noticia.titulo}} <ion-icon *ngIf="campeonato.id==idCampeonatoRoot" color="danger" name="trash"
+            (click)="removerNoticia(noticia.id)">
+          </ion-icon>
+        </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        {{noticia.texto}}
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+
+
+  <ion-list *ngIf="showleague">
+    <ion-list-header>
+      <h2>Tabela de Jogos</h2>
+      <ion-fab-button *ngIf="campeonato.id==idCampeonatoRoot" (click)="adicionarConfronto()">
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </ion-list-header>
+    <ion-item *ngFor="let confronto of confrontos">
+      <ion-label>
+        <ion-badge color="success" slot="end">{{confronto.data | date: 'dd/MM/yyyy'}} {{confronto.hora | date: 'HH:mm'}}
+        </ion-badge>
+        <h2><b>{{clube.nome}} {{confronto.placarClube}} x {{confronto.placarAdiversario}} {{confronto.adversario}}
+            <ion-icon *ngIf="campeonato.id==idCampeonatoRoot" color="danger" name="trash"
+              (click)="removerConfronto(confronto.id)"></ion-icon></b></h2>
+        <h3>São Januario</h3>
+      </ion-label>
+
+    </ion-item>
+  </ion-list>
+
+
+  <ion-fab *ngIf="campeonato.id==idCampeonatoRoot" horizontal="start" vertical="bottom" slot="fixed">
+    <ion-fab-button color="dark">
+      <ion-icon name="settings"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="top">
+      <ion-fab-button color="danger" (click)="presentAlertConfirm()">
+        <ion-icon name="trash"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button color="primary" (click)="sair()">
+        <ion-icon name="log-out"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
 
 
 
@@ -79,7 +143,11 @@
 
 
 
-<!--
+
+
+
+
+  <!--
   <ion-card>
     <img src="./assets/inicioRodada.jpg" />
     <ion-card-header>

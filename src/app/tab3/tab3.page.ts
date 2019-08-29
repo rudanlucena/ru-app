@@ -9,45 +9,38 @@ import { LoadingController, AlertController } from '@ionic/angular';
   styleUrls: ['tab3.page.scss']
 })
 export class Tab3Page {
-
+  showSpinner:boolean = false
   clubes:Clube[];
+  clubesSearch:Clube[];
 
   constructor(private alertController:AlertController, public loadingController: LoadingController, private clubeService:ClubeService) {
     
   }
 
   ionViewWillEnter() {
-    this.presentLoading();
     let cepAtual = localStorage.getItem("cepAtual");
     this.buscarClubes(cepAtual)
+
   }
-
-
-  
-  async presentLoading() {
-    const loading = await this.loadingController.create({
-      message: 'Carregando...',
-      duration: 2000
-    });
-    await loading.present();
-
-    const { role, data } = await loading.onDidDismiss();
-
-    console.log('Loading dismissed!');
-  }
-
 
   buscarClubes(cep:string){
+    this.showSpinner = true;
     this.clubeService.getClubes(cep).subscribe(
       response => {
+        this.showSpinner = false;
         this.clubes = response.body
         if(this.clubes.length==0){
           this.presentAlert();
+        }
+        else{
+          this.showSpinner = false;
+          this.clubesSearch = this.clubes;
         }
         console.log(response)
         
       },
       error => {
+        this.presentAlertError();
         console.log("Houve algum erro ao carregar a lista");
       }
     )
@@ -60,6 +53,25 @@ export class Tab3Page {
     });
 
     await alert.present();
+  }
+
+  async presentAlertError() {
+    const alert = await this.alertController.create({
+      message: 'Não foi possivel carregar a lista de clubes no momento.',
+      buttons: ['OK']
+    });
+
+    await alert.present();
+  }
+
+  getUsuarios(ev: any) : void {
+    let nome_pesquisa = ev.target.value;
+
+    if (nome_pesquisa && nome_pesquisa.trim() != '') {
+      this.clubesSearch = this.clubes.filter((clube) => {
+        return (clube.nome.toLowerCase().indexOf(nome_pesquisa.toLowerCase()) > -1);
+      })
+    }
   }
 
 }

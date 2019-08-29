@@ -3,6 +3,7 @@ import { ClubeService } from '../service/clube-service';
 import { Clube } from '../model/Clube';
 import { Router } from '@angular/router';
 import { CampeonatoService } from '../service/campeonato-service';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -12,9 +13,10 @@ import { CampeonatoService } from '../service/campeonato-service';
 export class LoginPage implements OnInit {
   public login:string;
   public senha:string;
-  public modo:string
+  public modo:string;
+  public toast:any
 
-  constructor(private clubeService:ClubeService, private campeonatoService:CampeonatoService, private router: Router) { 
+  constructor(private toastController:ToastController, private clubeService:ClubeService, private campeonatoService:CampeonatoService, private router: Router) { 
     this.login = ""
     this.senha = ""
     this.modo=""
@@ -36,7 +38,7 @@ export class LoginPage implements OnInit {
           console.log(response)
         },
         error => {
-          console.log("Houve algum erro ao carregar a lista");
+          this.showToastFail();
         }
       )
     }
@@ -45,13 +47,14 @@ export class LoginPage implements OnInit {
         response => {
           let idCampeonato = response.body.id.toString();
           sessionStorage.setItem("idCampeonatoRoot", idCampeonato);
+          localStorage.setItem("idCampeonatoAtual", idCampeonato);
           this.login=""
           this.senha=""
           this.router.navigate(["/tabs/tab2"])
           console.log(response)
         },
         error => {
-          console.log("Houve algum erro ao carregar a lista");
+          this.showToastFail();
         }
       )
     }
@@ -59,6 +62,18 @@ export class LoginPage implements OnInit {
 
   ionViewWillUnload(){
 
+  }
+
+  showToastFail() {
+    this.toast = this.toastController.create({
+      message: 'Não foi possivel realizar o login',
+      color: "danger",
+      position: "middle",
+      duration: 2000
+    }).then((toastData)=>{
+      console.log(toastData);
+      toastData.present();
+    });
   }
 
 }

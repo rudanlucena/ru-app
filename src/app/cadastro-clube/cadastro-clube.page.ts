@@ -38,6 +38,41 @@ export class CadastroClubePage implements OnInit {
 
   }
 
+  buscarClube(id: number) {
+    this.clubeService.getClubeByCepAndNome(this.clube.cep, this.clube.nome).subscribe(
+      response => {
+        this.showToastFailNomeDuplicate()
+      },
+      error => {
+        console.log(error);
+        if(error.status==404){
+          this.buscarUsername()
+        }
+        else{
+          this.showToastFail()
+        }
+      }
+    )
+  }
+
+  buscarUsername() {
+    this.clubeService.getClubeByUsername(this.clube.login).subscribe(
+      response => {
+        this.showToastFailLoginDuplicate()
+      },
+      error => {
+        console.log(error);
+        if(error.status==404){
+          this.salvarClube()
+        }
+        else{
+          this.showToastFail()
+        }
+      }
+      
+    )
+  }
+
   showToastSuccess() {
     this.toast = this.toastController.create({
       message: 'clube salvo com sucesso! informe seu login e senha para entar',
@@ -53,6 +88,30 @@ export class CadastroClubePage implements OnInit {
   showToastFail() {
     this.toast = this.toastController.create({
       message: 'Não foi possivel salvar o clube',
+      color: "danger",
+      position: "middle",
+      duration: 2000
+    }).then((toastData)=>{
+      console.log(toastData);
+      toastData.present();
+    });
+  }
+
+  showToastFailNomeDuplicate() {
+    this.toast = this.toastController.create({
+      message: 'Este nome de clube ja existe em sua cidade!',
+      color: "danger",
+      position: "middle",
+      duration: 2000
+    }).then((toastData)=>{
+      console.log(toastData);
+      toastData.present();
+    });
+  }
+
+  showToastFailLoginDuplicate() {
+    this.toast = this.toastController.create({
+      message: 'Este login ja é utilizado por outra conta!',
       color: "danger",
       position: "middle",
       duration: 2000

@@ -218,7 +218,7 @@ export class TimePage implements OnInit {
   }
 
   sair(){
-    localStorage.removeItem("idRoot");
+    sessionStorage.removeItem("idRoot");
     this.router.navigate(["/tabs/tab4/"])
   } 
 

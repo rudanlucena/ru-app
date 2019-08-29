@@ -31,6 +31,16 @@ export class ClubeService {
         return this.http.get<Clube>(url, { observe: 'response' })
     } 
 
+    public getClubeByUsername(login:string): Observable<HttpResponse<Clube>> {
+        const url = `${this.urlClube}/login/${login}`;
+        return this.http.get<Clube>(url, { observe: 'response' })
+    } 
+
+    public getClubeByCepAndNome(cep:string, nome:string): Observable<HttpResponse<Clube>> {
+        const url = `${this.urlClube}/${cep}/nome/${nome}`;
+        return this.http.get<Clube>(url, { observe: 'response' })
+    } 
+
     public getTitulos(id: number): Observable<HttpResponse<Titulo[]>> {
         const url = `${this.urlClube}/${id}/titulos`;
         return this.http.get<Titulo[]>(url, { observe: 'response' })

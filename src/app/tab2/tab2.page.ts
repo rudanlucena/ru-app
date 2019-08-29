@@ -15,6 +15,7 @@ import { NoticiaCampeonatoService } from '../service/noticia-service-campeonato'
   styleUrls: ['tab2.page.scss']
 })
 export class Tab2Page {
+  
   public campeonato: Campeonato
   public noticias: Noticia[]
   public confrontos: Confronto[]
@@ -22,6 +23,7 @@ export class Tab2Page {
   id: number
   idCampeonatoRoot
   public showleague:boolean;
+  carregandoNoticias:Boolean = true
 
   constructor(private noticiaCampeonatoService:NoticiaCampeonatoService, public loadingController: LoadingController, private alertCtrl: AlertController, public toastController: ToastController, private confrontoService: ConfrontoService, private campeoantoService: CampeonatoService, private noticiaService: NoticiaService, private activatedRoute: ActivatedRoute, private router: Router) {
     this.campeonato = new Campeonato()
@@ -108,6 +110,7 @@ export class Tab2Page {
   buscarNoticias(id: number) {
     this.campeoantoService.getNoticias(id).subscribe(
       response => {
+        this.carregandoNoticias = false;
         this.noticias = response.body
         console.log(response)
       },
@@ -182,7 +185,7 @@ export class Tab2Page {
   }
 
   sair(){
-    localStorage.removeItem("idCampeonatoRoot");
+    sessionStorage.removeItem("idCampeonatoRoot");
     this.router.navigate(["/tabs/tab4/"])
   }
 

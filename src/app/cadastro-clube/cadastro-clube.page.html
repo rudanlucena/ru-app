@@ -14,7 +14,7 @@
   </a>
 
 
-  <form #form="ngForm" (ngSubmit)="salvarClube()">
+  <form #form="ngForm" (ngSubmit)="buscarClube()">
     <ion-list lines="full" class="ion-no-margin ion-no-padding">
       <ion-input [(ngModel)]="clube.img" name="img" required type="file" #fileInput (change)="onFileChanged($event)">
       </ion-input>
