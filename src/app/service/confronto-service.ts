@@ -21,4 +21,14 @@ export class ConfrontoService {
         const url = `${this.url}/${idConfronto}/clube/${idClube}`;
         return await this.http.delete<Confronto>(url).toPromise();
     }
+
+    public async addConfrontoCampeonato(confronto:Confronto, idCampeonato:number):Promise<Confronto> {
+        const url = `${this.url}/campeonato/${idCampeonato}`;
+        return await this.http.post<Confronto>(url, confronto).toPromise();
+    }
+
+    public async removeConfrontoCampeonato(idConfronto:number, idCampeonato:number):Promise<Confronto> {
+        const url = `${this.url}/${idConfronto}/campeonato/${idCampeonato}`;
+        return await this.http.delete<Confronto>(url).toPromise();
+    }
 }

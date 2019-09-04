@@ -15,6 +15,7 @@ export class LoginPage implements OnInit {
   public senha:string;
   public modo:string;
   public toast:any
+  public showSpinner = false
 
   constructor(private toastController:ToastController, private clubeService:ClubeService, private campeonatoService:CampeonatoService, private router: Router) { 
     this.login = ""
@@ -26,9 +27,11 @@ export class LoginPage implements OnInit {
   }
 
   logar(){
+    this.showSpinner = true;
     if(this.modo=="treinador"){
       this.clubeService.getClubeByLogin(this.login, this.senha).subscribe(
         response => {
+          this.showSpinner = false
           let idClube = response.body.id.toString();
           sessionStorage.setItem("idRoot", idClube);
           this.login=""
@@ -38,6 +41,7 @@ export class LoginPage implements OnInit {
           console.log(response)
         },
         error => {
+          this.showSpinner = false
           this.showToastFail();
         }
       )
@@ -45,6 +49,7 @@ export class LoginPage implements OnInit {
     else if(this.modo=="organizador"){
       this.campeonatoService.getCampeonatoByLogin(this.login, this.senha).subscribe(
         response => {
+          this.showSpinner = false
           let idCampeonato = response.body.id.toString();
           sessionStorage.setItem("idCampeonatoRoot", idCampeonato);
           localStorage.setItem("idCampeonatoAtual", idCampeonato);
@@ -54,6 +59,7 @@ export class LoginPage implements OnInit {
           console.log(response)
         },
         error => {
+          this.showSpinner = false
           this.showToastFail();
         }
       )

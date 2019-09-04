@@ -47,13 +47,13 @@
         </ion-card-title>
       </ion-card-header>
       <ion-card-content>
-        {{noticia.texto}}
+              <ion-textarea required disabled name="texto">{{noticia.texto}}</ion-textarea>
       </ion-card-content>
     </ion-card>
   </ion-list>
 
 
-  <ion-list>
+  <ion-list class="">
     <ion-list-header>
       <h2>Jogos da Equipe</h2>
       <ion-fab-button *ngIf="clube.id==idRoot" (click)="adicionarConfronto()">
@@ -66,13 +66,13 @@
             </ion-badge>
         <h2><b>{{clube.nome}} {{confronto.placarClube}} x {{confronto.placarAdiversario}} {{confronto.adversario}}
             <ion-icon *ngIf="clube.id==idRoot" color="danger" name="trash" (click)="removerConfronto(confronto.id)"></ion-icon></b></h2>
-        <h3>São Januario</h3>
+        <h3>{{confronto.local}}</h3>
       </ion-label>
 
     </ion-item>
   </ion-list>
 
-  <ion-list>
+  <ion-list class="titulos">
     <ion-list-header><h2>Titulos (Pro)</h2>
       <ion-fab-button *ngIf="clube.id==idRoot" (click)="adicionarTitulo()">
         <ion-icon name="add"></ion-icon>

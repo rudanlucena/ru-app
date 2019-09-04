@@ -10,11 +10,10 @@
 <ion-content>
 
     <a md-raised-button color="primary" (click)="fileInput.click()">
-        <img *ngIf="!isFoto" src="/assets/arena.jpg">
         <img *ngIf="isFoto" src="{{foto}}">
     </a>
     <form #form="ngForm" (ngSubmit)="adicionarNoticia()">
-    <ion-input [(ngModel)]="noticia.img" name="img" required  type="file" name="img" #fileInput (change)="onFileChanged($event)"></ion-input>
+    <ion-input [(ngModel)]="noticia.img" name="img" type="file" name="img" #fileInput (change)="onFileChanged($event)"></ion-input>
 
   <ion-list lines="none">
     <ion-list-header>

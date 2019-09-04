@@ -43,6 +43,7 @@ export class CampeonatoService {
         return this.http.get<Noticia[]>(url, { observe: 'response' })
     }
 
+
     public getPatrocinadores(id: number): Observable<HttpResponse<Patrocinador[]>> {
         const url = `${this.url}/${id}/patrocinadores`;
         return this.http.get<Patrocinador[]>(url, { observe: 'response' })

@@ -55,6 +55,17 @@ export class TimePage implements OnInit {
     this.clubeService.getClube(id).subscribe(
       response => {
         this.clube = response.body
+
+        this.confrontos.sort((a, b) => {
+          // 1st property, sort by count
+          if (a.data < b.data)
+            return -1;
+
+          if (a.data > b.data)
+            return 1;
+
+        });
+        
         console.log(response)
       },
       error => {

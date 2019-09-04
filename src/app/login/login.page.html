@@ -37,6 +37,11 @@
       </ion-item>
     </ion-list>
 
+    <ion-item *ngIf="showSpinner">
+      <ion-label>Fazendo Login...</ion-label>
+      <ion-spinner></ion-spinner>
+    </ion-item>
+
     <div class="ion-padding">
       <ion-button expand="block" [disabled]="form.invalid" type="submit" class="ion-no-margin">Entrar</ion-button>
     </div>

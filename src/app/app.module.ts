@@ -24,6 +24,7 @@ import { EditarClubePageModule } from './editar-clube/editar-clube.module';
 import { CadastroNoticiaCampeonatoPageModule } from './cadastro-noticia-campeonato/cadastro-noticia-campeonato.module';
 import { CadastroCampeonatoPageModule } from './cadastro-campeonato/cadastro-campeonato.module';
 import { CampeonatoPageModule } from './campeonato/campeonato.module';
+import { CadastroConfrontoCampeonatoPageModule } from './cadastro-confronto-campeonato/cadastro-confronto-campeonato.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -49,6 +50,7 @@ import { CampeonatoPageModule } from './campeonato/campeonato.module';
     CadastroNoticiaCampeonatoPageModule,
     CadastroCampeonatoPageModule,
     CampeonatoPageModule,
+    CadastroConfrontoCampeonatoPageModule,
     FormsModule,
     HttpClientModule],
   providers: [

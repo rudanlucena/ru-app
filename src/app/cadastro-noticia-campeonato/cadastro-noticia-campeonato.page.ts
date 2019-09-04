@@ -26,7 +26,8 @@ export class CadastroNoticiaCampeonatoPage implements OnInit {
   async adicionarNoticia(){
     try{
       await this.noticiaCampeonatoService.addNoticia(this.noticia, this.id)
-      this.router.navigate(["/tabs/tab1"])
+      window.location.href="/tabs/tab2"
+      //this.router.navigate(["/tabs/tab2"])
       console.log(this.noticia)
       this.showToastSuccess();
     }

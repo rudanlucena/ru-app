@@ -15,23 +15,23 @@ import { NoticiaCampeonatoService } from '../service/noticia-service-campeonato'
   styleUrls: ['tab2.page.scss']
 })
 export class Tab2Page {
-  
+
   public campeonato: Campeonato
   public noticias: Noticia[]
   public confrontos: Confronto[]
   toast: any
   id: number
   idCampeonatoRoot
-  public showleague:boolean;
-  carregandoNoticias:Boolean = true
+  public showleague: boolean;
+  carregandoNoticias: Boolean = true
 
-  constructor(private noticiaCampeonatoService:NoticiaCampeonatoService, public loadingController: LoadingController, private alertCtrl: AlertController, public toastController: ToastController, private confrontoService: ConfrontoService, private campeoantoService: CampeonatoService, private noticiaService: NoticiaService, private activatedRoute: ActivatedRoute, private router: Router) {
+  constructor(private noticiaCampeonatoService: NoticiaCampeonatoService, public loadingController: LoadingController, private alertCtrl: AlertController, public toastController: ToastController, private confrontoService: ConfrontoService, private campeoantoService: CampeonatoService, private noticiaService: NoticiaService, private activatedRoute: ActivatedRoute, private router: Router) {
     this.campeonato = new Campeonato()
     this.confrontos = []
     this.noticias = []
     this.showleague = false;
 
-    
+
     console.log(this.idCampeonatoRoot)
   }
 
@@ -41,17 +41,21 @@ export class Tab2Page {
   }
 
   ionViewWillEnter() {
+    console.log("JHGJGJGHJGJ")
+    //this.id = Number(this.activatedRoute.snapshot.paramMap.get('id'));
     this.idCampeonatoRoot = sessionStorage.getItem("idCampeonatoRoot");
+
     this.presentLoading();
     let idLocalStorage = localStorage.getItem("idCampeonatoAtual");
     if (idLocalStorage != null) {
       this.showleague = true;
       this.id = Number(idLocalStorage)
+      this.buscarConfrontos(this.id)
       this.buscarCampeonato(this.id)
       this.buscarNoticias(this.id)
-      this.buscarConfrontos(this.id)
+
     }
-    else{
+    else {
       this.presentAlert();
       this.showleague = false;
       this.router.navigate(["/tabs/tab1/"])
@@ -126,6 +130,17 @@ export class Tab2Page {
     this.campeoantoService.getConfrontos(id).subscribe(
       response => {
         this.confrontos = response.body
+
+        this.confrontos.sort((a, b) => {
+          // 1st property, sort by count
+          if (a.data < b.data)
+            return -1;
+
+          if (a.data > b.data)
+            return 1;
+
+        });
+
         console.log(response)
       },
       error => {
@@ -156,7 +171,7 @@ export class Tab2Page {
       this.showPopup('Remova partidas antigas e assim poderá adicionar novas', 'Conta PRO - 10 jogos cadastrados');
     }
     else {
-      this.router.navigate(["/cadastro-confronto/" + this.id])
+      this.router.navigate(["/cadastro-confronto-campeonato/" + this.id])
     }
   }
 
@@ -175,7 +190,7 @@ export class Tab2Page {
 
   async removerConfronto(idConfronto: number) {
     try {
-      await this.confrontoService.removeConfronto(idConfronto, this.id)
+      await this.confrontoService.removeConfrontoCampeonato(idConfronto, this.id)
       this.showToastSuccess();
       this.buscarConfrontos(this.id)
     } catch (e) {
@@ -184,7 +199,7 @@ export class Tab2Page {
 
   }
 
-  sair(){
+  sair() {
     sessionStorage.removeItem("idCampeonatoRoot");
     this.router.navigate(["/tabs/tab4/"])
   }

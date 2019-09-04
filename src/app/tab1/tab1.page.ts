@@ -12,6 +12,7 @@ import { ToastController, AlertController, LoadingController } from '@ionic/angu
 export class Tab1Page {
   //@ViewChild('select1') select1: Select;
   @ViewChildren('select1') select: Selection;
+  @ViewChildren('cepInput') cepInput;
   
   showSpinner:boolean = false
   public campeonatos:Campeonato[]
@@ -26,6 +27,13 @@ export class Tab1Page {
     this.selectDisabled = true
     let cepLocalStorage = localStorage.getItem("cepAtual");
     //this.cep = cepLocalStorage
+  }
+
+  ionViewWillEnter(){
+    console.log("ionViewDidLoad");
+    setTimeout(() => {
+      this.cepInput.setFocus();
+    }, 500);
   }
 
   buscarCampeonatos() {
@@ -85,8 +93,8 @@ export class Tab1Page {
     await alert.present();
   }
 
-  selecionarCampeonato(){
-    localStorage.setItem("idCampeonatoAtual", this.idCampeonato);
+  selecionarCampeonato(id:string){
+    localStorage.setItem("idCampeonatoAtual", id);
     this.router.navigate(["/tabs/tab2"])
     console.log("Carreagando....");
   }

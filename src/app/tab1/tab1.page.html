@@ -1,43 +1,68 @@
 <ion-header>
   <ion-toolbar color="dark">
     <ion-title>
-      Arena MilGrau
+      Arena Mil Grau
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-card class="welcome-card">
-    <img src="/assets/arena.jpg" alt="" />
-    <ion-card-header>
-      <ion-card-title>Campeonatos Online</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <p>Quer divulgar seu campeonato de forma pratica? quer ficar por dentro dos campeonatos da sua cidade?. O Arena
-        MilGrau é o app perfeito pra você! </p>
-    </ion-card-content>
-  </ion-card>
+
 
   <ion-list lines="none">
-    <ion-list-header>
-      <ion-label>Informe o CEP e a LIGA</ion-label>
-    </ion-list-header>
+      <ion-item><b>Informe o cep da sua Cidade</b></ion-item>
     <ion-item>
       <ion-icon slot="start" color="medium" name="pin"></ion-icon>
-      <ion-input [(ngModel)]="cep" (change)="buscarCampeonatos()" placeholder="CEP"></ion-input>
+      <ion-input #cepInput [(ngModel)]="cep" type="number" (change)="buscarCampeonatos()" placeholder="CEP (Apenas Numeros)">
+      </ion-input>
     </ion-item>
     <ion-item *ngIf="showSpinner">
-        <ion-label>Buscando Campeonatos..</ion-label>
-        <ion-spinner></ion-spinner>
-      </ion-item>
-    <ion-item disabled="{{selectDisabled}}">
-      <ion-label>Selecionar Campeonato</ion-label>
-      <ion-select #select1  [(ngModel)]="idCampeonato" value="notifications" interface="action-sheet"
-        (ionChange)="selecionarCampeonato()">
-        
-          <ion-select-option *ngFor="let campeonato of campeonatos" value="{{campeonato.id}}">{{campeonato.nome}}</ion-select-option>
- 
-      </ion-select>
+      <ion-label>Buscando Campeonatos..</ion-label>
+      <ion-spinner></ion-spinner>
     </ion-item>
+
+
+    <ion-item *ngFor="let campeonato of campeonatos" (click)="selecionarCampeonato(campeonato.id)">
+      <ion-label>{{campeonato.nome}}</ion-label>
+      <ion-icon name="arrow-dropright"></ion-icon>
+    </ion-item>
+
+    <ion-card class="welcome-card">
+      <img src="/assets/arena.jpg" alt="" />
+      <ion-card-header>
+        <ion-card-title>Campeonatos Online</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p>Quer divulgar seu campeonato de forma pratica? quer ficar por dentro dos campeonatos da sua cidade?. O Arena
+          MilGrau é o app perfeito pra você! </p>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-list>
+        <ion-list-header>
+          Apoio
+        </ion-list-header>
+
+        <ion-item>
+          <ion-avatar slot="start">
+            <img src="/assets/arena.jpg">
+          </ion-avatar>
+          <ion-label>
+            <h2>Empresa </h2>
+            <h3>Cajazeiras PB</h3>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+
+    <!--<ion-item disabled="{{selectDisabled}}">
+      <ion-label>Selecionar Campeonato</ion-label>
+      <ion-select #select1 [(ngModel)]="idCampeonato" value="notifications" interface="action-sheet"
+        (ionChange)="selecionarCampeonato()">
+
+        <ion-select-option *ngFor="let campeonato of campeonatos" value="{{campeonato.id}}">{{campeonato.nome}}
+        </ion-select-option>
+
+      </ion-select>
+    </ion-item>-->
   </ion-list>
 </ion-content>
