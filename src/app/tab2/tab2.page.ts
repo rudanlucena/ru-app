@@ -8,6 +8,7 @@ import { CampeonatoService } from '../service/campeonato-service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NoticiaService } from '../service/noticia-service';
 import { NoticiaCampeonatoService } from '../service/noticia-service-campeonato';
+import { EnqueteConfronto } from '../model/EnqueteConfronto';
 
 @Component({
   selector: 'app-tab2',
@@ -19,16 +20,31 @@ export class Tab2Page {
   public campeonato: Campeonato
   public noticias: Noticia[]
   public confrontos: Confronto[]
+  public enquetes: EnqueteConfronto[]
   toast: any
   id: number
   idCampeonatoRoot
   public showleague: boolean;
+
+  showNoticias = true
+  showJogos = false
+
   carregandoNoticias: Boolean = true
+
+  slideOptions = {
+    initialSlide: 1,
+    speed: 400,
+  };
+
+  slidesDidLoad(slides: IonSlides) {
+    slides.startAutoplay();
+  }
 
   constructor(private noticiaCampeonatoService: NoticiaCampeonatoService, public loadingController: LoadingController, private alertCtrl: AlertController, public toastController: ToastController, private confrontoService: ConfrontoService, private campeoantoService: CampeonatoService, private noticiaService: NoticiaService, private activatedRoute: ActivatedRoute, private router: Router) {
     this.campeonato = new Campeonato()
     this.confrontos = []
     this.noticias = []
+    this.enquetes = []
     this.showleague = false;
 
 
@@ -53,6 +69,7 @@ export class Tab2Page {
       this.buscarConfrontos(this.id)
       this.buscarCampeonato(this.id)
       this.buscarNoticias(this.id)
+      this.buscarEnquetes()
 
     }
     else {
@@ -120,6 +137,17 @@ export class Tab2Page {
       },
       error => {
         console.log("Houve algum erro ao carregar a lista");
+      }
+    )
+  }
+  buscarEnquetes() {
+    this.confrontoService.getEnquetes().subscribe(
+      response => {
+        this.enquetes = response.body
+        console.log(response)
+      },
+      error => {
+        console.log("Houve algum erro ao carregar a lista de enquetes");
       }
     )
   }
@@ -276,5 +304,46 @@ export class Tab2Page {
       ]
     });
     alert.present();
+  }
+
+  mostrarNoticias() {
+    this.showJogos = false
+    this.showNoticias = true
+  }
+
+  mostrarJogos() {
+    this.showJogos = true
+    this.showNoticias = false
+  }
+
+  carregarNoticia(noticia: Noticia) {
+    sessionStorage.setItem("noticia", JSON.stringify(noticia))
+    this.router.navigate(["/noticia"])
+  }
+
+  substringNoticia(texto: string): string {
+    return texto.substring(0, 500)
+  }
+
+   async votar(id:number, palpite:string) {
+    try {
+      
+      await this.confrontoService.votar(id, palpite)
+      this.buscarEnquetes();
+      this.showToastSuccess();
+      
+    } catch (e) {
+      this.showToastFail();
+    }
+
+    console.log(id, palpite);
+  }
+
+  cortar(percentual:number):number{
+    
+    if(percentual!=0)
+      return Number(percentual.toFixed(2))
+      else
+      return percentual
   }
 }

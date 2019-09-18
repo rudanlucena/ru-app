@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-toolbar color="dark">
+      <ion-buttons slot="start">
+          <ion-back-button defaultHref="/tabs/tab2"></ion-back-button>
+        </ion-buttons>
+    <ion-title>Arena Mil Grau</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <!-- Skeleton screen -->
+
+  <ion-slides padding [options]="slideOptions" #slider (ionSlidesDidLoad)="slidesDidLoad(slider)">
+
+    <ion-slide>
+      <img src="/assets/patrocinador.png" />
+    </ion-slide>
+
+    <ion-slide>
+      <img src="/assets/patrocinador.png" />
+    </ion-slide>
+
+    <ion-slide>
+      <img src="/assets/patrocinador.png" />
+    </ion-slide>
+
+    <ion-slide>
+      <img src="/assets/patrocinador.png" />
+    </ion-slide>
+
+  </ion-slides>
+
+  <ion-list>
+
+    <ion-card>
+      <ion-card-title>{{noticia.titulo}}
+      </ion-card-title>
+      <img src="{{noticia.img}}" />
+      <ion-card-header>
+
+      </ion-card-header>
+      <ion-card-content>
+        <ion-textarea required disabled name="texto">{{noticia.texto}}</ion-textarea>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+
+</ion-content>

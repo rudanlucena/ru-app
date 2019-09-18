@@ -21,6 +21,7 @@ const routes: Routes = [
   { path: 'cadastro-clube', loadChildren: './cadastro-clube/cadastro-clube.module#CadastroClubePageModule' },
   { path: 'cadastro-pro', loadChildren: './cadastro-pro/cadastro-pro.module#CadastroProPageModule' },
   { path: 'cadastro-campeonato', loadChildren: './cadastro-campeonato/cadastro-campeonato.module#CadastroCampeonatoPageModule' },
+  { path: 'noticia', loadChildren: './noticia/noticia.module#NoticiaPageModule' },
   
   
   
