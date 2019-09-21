@@ -10,6 +10,9 @@ import { NoticiaService } from '../service/noticia-service';
 import { NoticiaCampeonatoService } from '../service/noticia-service-campeonato';
 import { EnqueteConfronto } from '../model/EnqueteConfronto';
 
+import { Uid } from '@ionic-native/uid/ngx';
+import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
+
 @Component({
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
@@ -40,7 +43,7 @@ export class Tab2Page {
     slides.startAutoplay();
   }
 
-  constructor(private noticiaCampeonatoService: NoticiaCampeonatoService, public loadingController: LoadingController, private alertCtrl: AlertController, public toastController: ToastController, private confrontoService: ConfrontoService, private campeoantoService: CampeonatoService, private noticiaService: NoticiaService, private activatedRoute: ActivatedRoute, private router: Router) {
+  constructor(private uid: Uid, private androidPermissions: AndroidPermissions,private noticiaCampeonatoService: NoticiaCampeonatoService, public loadingController: LoadingController, private alertCtrl: AlertController, public toastController: ToastController, private confrontoService: ConfrontoService, private campeoantoService: CampeonatoService, private noticiaService: NoticiaService, private activatedRoute: ActivatedRoute, private router: Router) {
     this.campeonato = new Campeonato()
     this.confrontos = []
     this.noticias = []
@@ -61,7 +64,7 @@ export class Tab2Page {
     //this.id = Number(this.activatedRoute.snapshot.paramMap.get('id'));
     this.idCampeonatoRoot = sessionStorage.getItem("idCampeonatoRoot");
 
-    this.presentLoading();
+    //this.presentLoading();
     let idLocalStorage = localStorage.getItem("idCampeonatoAtual");
     if (idLocalStorage != null) {
       this.showleague = true;
@@ -77,6 +80,8 @@ export class Tab2Page {
       this.showleague = false;
       this.router.navigate(["/tabs/tab1/"])
     }
+
+    console.log("IMEI: "+this.getImei())
 
 
   }
@@ -99,7 +104,7 @@ export class Tab2Page {
     await alert.present();
   }
 
-  async presentLoading() {
+  /*async presentLoading() {
     const loading = await this.loadingController.create({
       message: 'Carregando...',
       duration: 2000
@@ -109,7 +114,7 @@ export class Tab2Page {
     const { role, data } = await loading.onDidDismiss();
 
     console.log('Loading dismissed!');
-  }
+  }*/
 
 
   buscarCampeonato(id: number) {
@@ -144,6 +149,15 @@ export class Tab2Page {
     this.confrontoService.getEnquetes().subscribe(
       response => {
         this.enquetes = response.body
+        this.enquetes.sort((a, b) => {
+          // 1st property, sort by count
+          if (a.id < b.id)
+            return -1;
+
+          if (a.id > b.id)
+            return 1;
+
+        });
         console.log(response)
       },
       error => {
@@ -342,8 +356,29 @@ export class Tab2Page {
   cortar(percentual:number):number{
     
     if(percentual!=0)
-      return Number(percentual.toFixed(2))
+      return Number(percentual.toFixed(0))
       else
       return percentual
   }
+
+  async getImei() {
+    const { hasPermission } = await this.androidPermissions.checkPermission(
+      this.androidPermissions.PERMISSION.READ_PHONE_STATE
+    );
+   
+    if (!hasPermission) {
+      const result = await this.androidPermissions.requestPermission(
+        this.androidPermissions.PERMISSION.READ_PHONE_STATE
+      );
+   
+      if (!result.hasPermission) {
+        throw new Error('Permissions required');
+      }
+   
+      // ok, a user gave us permission, we can get him identifiers after restart app
+      return;
+    }
+   
+     return this.uid.IMEI
+   }
 }
