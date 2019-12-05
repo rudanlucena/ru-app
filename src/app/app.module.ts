@@ -25,7 +25,8 @@ import { CadastroNoticiaCampeonatoPageModule } from './cadastro-noticia-campeona
 import { CadastroCampeonatoPageModule } from './cadastro-campeonato/cadastro-campeonato.module';
 import { CampeonatoPageModule } from './campeonato/campeonato.module';
 import { CadastroConfrontoCampeonatoPageModule } from './cadastro-confronto-campeonato/cadastro-confronto-campeonato.module';
-
+import { QRCodeModule } from 'angularx-qrcode';
+import { NgxQRCodeModule } from 'ngx-qrcode2';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -52,7 +53,9 @@ import { CadastroConfrontoCampeonatoPageModule } from './cadastro-confronto-camp
     CampeonatoPageModule,
     CadastroConfrontoCampeonatoPageModule,
     FormsModule,
-    HttpClientModule],
+    HttpClientModule,
+    NgxQRCodeModule
+  ],
   providers: [
     StatusBar,
     SplashScreen,

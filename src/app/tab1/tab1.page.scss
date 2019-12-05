@@ -1,8 +1,35 @@
-.welcome-card img {
-  max-height: 35vh;
-  overflow: hidden;
+ion-toolbar{
+  background-color: #2E7D32;
+  color: white;
 }
+
+.welcome-card{
+  background-color: #4CAF50;
+  
+}
+
+ion-card-title{
+  color: white
+}
+
 
 .btn-search{
   text-align: center
 }
+
+.qrcode{
+  
+  text-align: center;
+  width: 150px;
+  height: auto;
+  margin: 0 auto;
+  margin-top: 10px;
+}
+
+.teste1{
+  text-align: center;
+  width: 150;
+  height: auto;
+  margin: 0 auto;
+}
+

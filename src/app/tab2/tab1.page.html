@@ -11,9 +11,9 @@
 
   <ion-list *ngIf="aluno==null" lines="full" class="ion-no-margin ion-no-padding">
     <ion-card class="welcome-card">
-      <div class="qrcode">
+      <ion-item class="qrcode">
         <img src="/assets/user.png" alt="" />
-      </div>
+      </ion-item>
 
     </ion-card>
     <ion-item>
@@ -36,8 +36,8 @@
 
 
 
-  <ion-fab *ngIf="aluno!=null" (click)="sair()" vertical="top" horizontal="end" slot="fixed">
-    <ion-fab-button color="light">
+  <ion-fab vertical="top" horizontal="end" slot="fixed">
+    <ion-fab-button>
       <ion-icon name="log-out"></ion-icon>
     </ion-fab-button>
   </ion-fab>
@@ -53,8 +53,8 @@
         <img src="/assets/user.png" alt="" />
       </div>
       <ion-card-header>
-        <ion-card-title><b>Nome:</b> {{aluno.nome}}</ion-card-title>
-        <ion-card-title><b>Matricula:</b> {{aluno.matricula}}</ion-card-title>
+        <ion-card-title>Nome: <b>{{aluno.nome}}</b></ion-card-title>
+        <ion-card-title>Matricula: <b>{{aluno.matricula}}</b></ion-card-title>
       </ion-card-header>
 
     </ion-card>

@@ -2,3 +2,18 @@
     width: 100%;
     height: auto
 }
+
+ion-toolbar{
+  background-color: #2E7D32;
+  color: white;
+}
+
+section {
+    margin-top: 1em;
+    margin-bottom: 2.5em;
+  }
+
+  section:not(.full-width),
+    .full-width > header {
+      padding: 0 10px;
+    }

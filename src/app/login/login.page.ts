@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ClubeService } from '../service/clube-service';
 import { Clube } from '../model/Clube';
 import { Router } from '@angular/router';
-import { CampeonatoService } from '../service/campeonato-service';
 import { ToastController } from '@ionic/angular';
+import { AlunoService } from '../service/aluno-service';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +17,7 @@ export class LoginPage implements OnInit {
   public toast:any
   public showSpinner = false
 
-  constructor(private toastController:ToastController, private clubeService:ClubeService, private campeonatoService:CampeonatoService, private router: Router) { 
+  constructor(private toastController:ToastController, private clubeService:ClubeService, private alunoService:AlunoService, private router: Router) { 
     this.login = ""
     this.senha = ""
     this.modo=""
@@ -46,7 +46,7 @@ export class LoginPage implements OnInit {
         }
       )
     }
-    else if(this.modo=="organizador"){
+    /*else if(this.modo=="organizador"){
       this.campeonatoService.getCampeonatoByLogin(this.login, this.senha).subscribe(
         response => {
           this.showSpinner = false
@@ -63,7 +63,7 @@ export class LoginPage implements OnInit {
           this.showToastFail();
         }
       )
-    }
+    }*/
   }
 
   ionViewWillUnload(){

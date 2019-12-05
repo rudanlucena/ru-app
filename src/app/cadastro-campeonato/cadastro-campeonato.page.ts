@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Campeonato } from '../model/Campeonato';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
-import { CampeonatoService } from '../service/campeonato-service';
+
+import { Aluno } from '../model/Aluno';
+import { AlunoService } from '../service/aluno-service';
 
 @Component({
   selector: 'app-cadastro-campeonato',
@@ -13,19 +14,19 @@ import { CampeonatoService } from '../service/campeonato-service';
 })
 export class CadastroCampeonatoPage implements OnInit {
   subscriptions: Subscription[] = [];
-  public campeonato:Campeonato
+  public campeonato:Aluno
   toast:any
   localidade:any
   public loginForm: FormGroup;
 
-  constructor(public formBuilder: FormBuilder, private campeonatoService: CampeonatoService, private router: Router, public toastController: ToastController) {
-    this.campeonato = new Campeonato();
+  constructor(public formBuilder: FormBuilder, private alunoService: AlunoService, private router: Router, public toastController: ToastController) {
+    this.campeonato = new Aluno();
   }
 
   ngOnInit() {
   }
 
-  async salvarCampeonato() {
+  /*async salvarCampeonato() {
     try {
       await this.campeonatoService.addCampeonato(this.campeonato)
       this.showToastSuccess();
@@ -34,7 +35,7 @@ export class CadastroCampeonatoPage implements OnInit {
       this.showToastFail();
     }
 
-  }
+  }*/
 
   showToastSuccess() {
     this.toast = this.toastController.create({
@@ -62,7 +63,7 @@ export class CadastroCampeonatoPage implements OnInit {
 
 
 
-  getLocalidade() {
+  /*getLocalidade() {
     this.subscriptions.push(
       this.campeonatoService.getLocalidade(this.campeonato.cep).subscribe(res => {
         this.localidade = res;
@@ -70,6 +71,6 @@ export class CadastroCampeonatoPage implements OnInit {
         this.campeonato.estado = this.localidade.uf
       })
     )
-  }
+  }*/
 
 }

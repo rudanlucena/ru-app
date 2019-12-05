@@ -7,18 +7,18 @@ import { environment } from 'src/environments/environment';
 import { Noticia } from '../model/Noticia';
 import { Patrocinador } from '../model/Patrocinador';
 import { Confronto } from '../model/Confronto';
-import { Campeonato } from '../model/Campeonato';
+import { Aluno } from '../model/Aluno';
 
 @Injectable({
     providedIn: 'root'
 })
-export class CampeonatoService {
+export class AlunoService {
 
-    private url = environment.host + "campeonatos"
+    private url = environment.host + "alunos"
 
     constructor(private http: HttpClient) { }
 
-    public getCampeonatos(cep: string): Observable<HttpResponse<Campeonato[]>> {
+    /*public getCampeonatos(cep: string): Observable<HttpResponse<Campeonato[]>> {
         const url = `${this.url}/localidade/${cep}`;
         return this.http.get<Campeonato[]>(url, { observe: 'response' })
     }
@@ -26,14 +26,14 @@ export class CampeonatoService {
     public getCampeonato(id: number): Observable<HttpResponse<Campeonato>> {
         const url = `${this.url}/${id}`;
         return this.http.get<Campeonato>(url, { observe: 'response' })
+    }*/
+
+    public getAlunoByLogin(matricula:string, senha:string): Observable<HttpResponse<Aluno>> {
+        const url = `${this.url}/${matricula}/${senha}`;
+        return this.http.get<Aluno>(url, { observe: 'response' })
     }
 
-    public getCampeonatoByLogin(login:string, senha:string): Observable<HttpResponse<Confronto>> {
-        const url = `${this.url}/${login}/senha/${senha}`;
-        return this.http.get<Confronto>(url, { observe: 'response' })
-    }
-
-    public getCampeonatoByCepAndNome(cep:string, nome:string): Observable<HttpResponse<Campeonato>> {
+    /*public getCampeonatoByCepAndNome(cep:string, nome:string): Observable<HttpResponse<Campeonato>> {
         const url = `${this.url}/${cep}/nome/${nome}`;
         return this.http.get<Campeonato>(url, { observe: 'response' })
     }
@@ -66,5 +66,5 @@ export class CampeonatoService {
 
     getLocalidade(cep: String): Observable<any[]>{
         return this.http.get<[]>("https://viacep.com.br/ws/"+cep+"/json/" );
-    }
+    }*/
 }

@@ -1,43 +1,43 @@
 <ion-header>
-  <ion-toolbar color="dark">
+  <ion-toolbar color="#2E7D32">
     <ion-title>
-      Times
+      Cancelar Refeição
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
     
-    <ion-fab vertical="bottom" [routerLink]="['/cadastro-clube']" routerLinkActive="router-link-active"  horizontal="center" slot="fixed">
-        <ion-fab-button>
-          <ion-icon name="add"></ion-icon>
-        </ion-fab-button>
-      </ion-fab>
-  <!--<ion-list >
-    <ion-item *ngFor="let clube of clubes" [routerLink]="['/time/'+clube.id]" routerLinkActive="router-link-active" >
-      <ion-avatar slot="start">
-        <img src="./assets/escudo.png" class="img-responsive">
-      </ion-avatar>
-      <ion-label>
-        <h2>{{clube.nome}}</h2>
-      </ion-label>
-    </ion-item>
-  </ion-list>-->
-
-  <ion-searchbar (ionInput)="getUsuarios($event)"></ion-searchbar>
-  <ion-item *ngIf="showSpinner">
-      <ion-label>Buscando Times..</ion-label>
-      <ion-spinner></ion-spinner>
-    </ion-item>
   <ion-list>
-    <ion-item *ngFor="let clube of clubesSearch" [routerLink]="['/time/'+clube.id]"
-      routerLinkActive="router-link-active">
-      <ion-avatar slot="start">
-        <img src="./assets/escudo.png" class="img-responsive">
-      </ion-avatar>
-      <ion-label>
-        <h2>{{clube.nome}}</h2>
-      </ion-label>
+
+    <ion-item>
+      <ion-label>De</ion-label>
+      <ion-datetime value="1990-02-19" placeholder="Select Date"></ion-datetime>
     </ion-item>
+    <ion-item>
+      <ion-label>Até</ion-label>
+      <ion-datetime value="1990-02-20" placeholder="Select Date"></ion-datetime>
+    </ion-item>
+    
+    
+    <ion-item>
+      <ion-label>Almoço</ion-label>
+      <ion-checkbox color="primary" checked slot="start"></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-checkbox color="primary" checked slot="start"></ion-checkbox>
+      <ion-label>Jantar</ion-label>
+    </ion-item>
+
+    <ion-item>
+        <ion-label>Motivo</ion-label>
+        <ion-textarea rows="6" cols="20" placeholder="Informe aqui o motivo de sua solicitação"></ion-textarea>
+      </ion-item>
+
+      <ion-input type="file" placeholder="Enter Input"></ion-input>
+
+      <section>
+        <ion-button expand="block">Enviar</ion-button>
+      </section>
   </ion-list>
 </ion-content>

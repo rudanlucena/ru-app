@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  host: 'https://arena-league-api.herokuapp.com/'
-  //host:  'http://localhost:9999/'
+  //host: 'https://arena-league-api.herokuapp.com/'
+  host:  'http://localhost:9999/'
 };
 
 /*

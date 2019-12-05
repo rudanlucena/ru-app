@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController, ToastController } from '@ionic/angular';
-import { Campeonato } from '../model/Campeonato';
+import { Aluno } from '../model/Aluno';
 import { Noticia } from '../model/Noticia';
 import { Confronto } from '../model/Confronto';
 import { ConfrontoService } from '../service/confronto-service';
-import { CampeonatoService } from '../service/campeonato-service';
 import { NoticiaService } from '../service/noticia-service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AlunoService } from '../service/aluno-service';
 
 @Component({
   selector: 'app-campeonato',
@@ -14,14 +14,14 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./campeonato.page.scss'],
 })
 export class CampeonatoPage implements OnInit {
-  public campeonato: Campeonato
+  public campeonato: Aluno
   public noticias: Noticia[]
   public confrontos: Confronto[]
   toast: any
   id: number
   idRoot
-  constructor(private alertCtrl: AlertController, public toastController: ToastController, private confrontoService: ConfrontoService, private campeoantoService: CampeonatoService, private noticiaService: NoticiaService, private activatedRoute: ActivatedRoute, private router: Router) {
-    this.campeonato = new Campeonato()
+  constructor(private alertCtrl: AlertController, public toastController: ToastController, private confrontoService: ConfrontoService, private alunoService: AlunoService, private noticiaService: NoticiaService, private activatedRoute: ActivatedRoute, private router: Router) {
+    this.campeonato = new Aluno()
     this.confrontos = []
     this.noticias = []
  
@@ -37,13 +37,13 @@ export class CampeonatoPage implements OnInit {
 
   ionViewWillEnter() {
     this.id = Number(this.activatedRoute.snapshot.paramMap.get('id'));
-    this.buscarCampeonato(this.id)
-    this.buscarNoticias(this.id)
-    this.buscarConfrontos(this.id)
+    //this.buscarCampeonato(this.id)
+    //this.buscarNoticias(this.id)
+    //this.buscarConfrontos(this.id)
   }
 
 
-  buscarCampeonato(id: number) {
+  /*buscarCampeonato(id: number) {
     this.campeoantoService.getCampeonato(id).subscribe(
       response => {
         this.campeonato = response.body
@@ -53,11 +53,11 @@ export class CampeonatoPage implements OnInit {
         console.log("Houve algum erro ao carregar a lista");
       }
     )
-  }
+  }*/
 
   
 
-  buscarNoticias(id: number) {
+  /*buscarNoticias(id: number) {
     this.campeoantoService.getNoticias(id).subscribe(
       response => {
         this.noticias = response.body
@@ -67,11 +67,11 @@ export class CampeonatoPage implements OnInit {
         console.log("Houve algum erro ao carregar a lista");
       }
     )
-  }
+  }*/
 
   
 
-  buscarConfrontos(id: number) {
+  /*buscarConfrontos(id: number) {
     this.campeoantoService.getConfrontos(id).subscribe(
       response => {
         this.confrontos = response.body
@@ -81,13 +81,13 @@ export class CampeonatoPage implements OnInit {
         console.log("Houve algum erro ao carregar a lista");
       }
     )
-  }
+  }*/
 
 
 
   
 
-  async adicionarNoticia() {
+  /*async adicionarNoticia() {
     if(!this.campeonato.pro && this.noticias.length >= 5){
       this.showPopup('Atualize para uma versão PRO e tenha um limite de até 20 noticias! opcionalmente você pode remover noticias antigas e assim poderá adicionar as mais atuais', 'Conta PRO - Limite de 5 noticias antingidas');
       this.router.navigate(["/cadastro-pro/"])
@@ -98,7 +98,7 @@ export class CampeonatoPage implements OnInit {
     else{
       this.router.navigate(["/cadastro-noticia/" + this.id])
     }
-  }
+  }*/
 
   async adicionarConfronto() {
     if(this.confrontos.length >= 10){
@@ -115,7 +115,7 @@ export class CampeonatoPage implements OnInit {
     try {
       await this.noticiaService.removeNoticia(idNoticia, this.id)
       this.showToastSuccess();
-      this.buscarNoticias(this.id)
+      //this.buscarNoticias(this.id)
     } catch (e) {
       this.showToastFail();
     }
@@ -126,7 +126,7 @@ export class CampeonatoPage implements OnInit {
     try {
       await this.confrontoService.removeConfronto(idConfronto, this.id)
       this.showToastSuccess();
-      this.buscarConfrontos(this.id)
+      //this.buscarConfrontos(this.id)
     } catch (e) {
       this.showToastFail();
     }
