@@ -8,6 +8,7 @@ import { Noticia } from '../model/Noticia';
 import { Patrocinador } from '../model/Patrocinador';
 import { Confronto } from '../model/Confronto';
 import { Aluno } from '../model/Aluno';
+import { AuxilioTemporario } from '../model/AuxilioTemporario';
 
 @Injectable({
     providedIn: 'root'
@@ -15,6 +16,7 @@ import { Aluno } from '../model/Aluno';
 export class AlunoService {
 
     private url = environment.host + "alunos"
+    private urlSolicitacao = environment.host + "auxiliosTemporarios"
 
     constructor(private http: HttpClient) { }
 
@@ -52,12 +54,14 @@ export class AlunoService {
     public getConfrontos(id: number): Observable<HttpResponse<Confronto[]>> {
         const url = `${this.url}/${id}/confrontos`;
         return this.http.get<Confronto[]>(url, { observe: 'response' })
+    }*/
+
+    public async solicitarAuxilioTemporario(auxilio:AuxilioTemporario):Promise<AuxilioTemporario> {
+        const url = `${this.urlSolicitacao}`;
+        return await this.http.post<AuxilioTemporario>(url, auxilio).toPromise();
     }
 
-    public async addCampeonato(campeonato:Campeonato):Promise<Campeonato> {
-        const url = `${this.url}`;
-        return await this.http.post<Campeonato>(url, campeonato).toPromise();
-    }
+    /*
 
     public async removerCampeonato(id:number):Promise<Campeonato> {
         const url = `${this.url}/${id}`;

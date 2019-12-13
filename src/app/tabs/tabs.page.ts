@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Aluno } from '../model/Aluno';
 
 @Component({
   selector: 'app-tabs',
@@ -6,7 +7,12 @@ import { Component } from '@angular/core';
   styleUrls: ['tabs.page.scss']
 })
 export class TabsPage {
-
+  alunoLogado:boolean=false;
+  aluno:Aluno
   constructor() {}
+
+  ionViewWillEnter() {
+    
+  }
 
 }
