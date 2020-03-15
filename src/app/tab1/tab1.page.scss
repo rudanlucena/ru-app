@@ -3,6 +3,10 @@ ion-toolbar{
   color: white;
 }
 
+ion-content{
+  background-color: red ;
+}
+
 .welcome-card{
   background-color: #4CAF50;
   
@@ -28,8 +32,89 @@ ion-card-title{
 
 .teste1{
   text-align: center;
-  width: 150;
+  
+  height: auto;
+  margin: 15px;
+  border: 3px dashed black;
+}
+
+@media print {
+  ion-card-title{
+    font-size: 12px;
+  }
+   .label{
+    visibility: hidden;
+    display: none;
+   }
+   ion-card-header{
+     text-align: center;
+     font-style: oblique;
+   }
+   ion-header{
+    visibility: hidden;
+    display: none;
+   }
+   ion-list {
+     width: 100%;
+   }
+  .ticket-no-print{
+    color: transparent !important
+  }
+
+  ion-tabs{
+    visibility: hidden;
+    display: none;
+  }
+
+  body * {
+      visibility: hidden;
+      display: none;
+  } 
+
+  #content * {
+    visibility: hidden;
+    display: none
+  }
+  #section-to-print, #section-to-print * {
+    visibility: visible;     
+  }
+
+#section-to-print{
+  visibility: visible;
+  width: 207px;  
+  border: 2px solid black;
+  height: 321px;
+        
+}
+
+.qrcode{
+  visibility: hidden;
+  text-align: center;
+  width: 50px;
   height: auto;
   margin: 0 auto;
-}
+  margin-top: 10px;
+    }
+    #section-to-print *{
+      position: relative;
+      left: 0;
+      top: 0;
+
+    }
+
+    * {
+      background:transparent !important;
+      color:black !important;
+      text-shadow:none !important;
+      filter:none !important;
+      -ms-filter:none !important;
+      }
+      
+      body {
+      margin:0;
+      padding:0;
+      line-height: 1.4em;
+      }
+      
+  }
 

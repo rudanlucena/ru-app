@@ -12,32 +12,36 @@
 
     <ion-item>
       <ion-label>De</ion-label>
-      <ion-datetime value="1990-02-19" placeholder="Select Date"></ion-datetime>
+      <ion-datetime value="1990-02-19" placeholder="Select Date" [(ngModel)]="cancelamento.inicio"></ion-datetime>
     </ion-item>
     <ion-item>
       <ion-label>Até</ion-label>
-      <ion-datetime value="1990-02-20" placeholder="Select Date"></ion-datetime>
+      <ion-datetime value="1990-02-20" placeholder="Select Date" [(ngModel)]="cancelamento.fim"></ion-datetime>
     </ion-item>
     
     
     <ion-item>
       <ion-label>Almoço</ion-label>
-      <ion-checkbox color="primary" checked slot="start"></ion-checkbox>
+      <ion-checkbox color="primary" checked slot="start" [(ngModel)]="almocoChecked"></ion-checkbox>
     </ion-item>
     <ion-item>
-      <ion-checkbox color="primary" checked slot="start"></ion-checkbox>
+      <ion-checkbox color="primary" checked slot="start" [(ngModel)]="jantarChecked"></ion-checkbox>
       <ion-label>Jantar</ion-label>
     </ion-item>
 
     <ion-item>
         <ion-label>Motivo</ion-label>
-        <ion-textarea rows="6" cols="20" placeholder="Informe aqui o motivo de sua solicitação"></ion-textarea>
+        <ion-textarea rows="6" cols="20" placeholder="Informe aqui o motivo de sua solicitação" [(ngModel)]="cancelamento.motivo"></ion-textarea>
       </ion-item>
 
-      <ion-input type="file" placeholder="Enter Input"></ion-input>
+      <!--<ion-input type="file" placeholder="Enter Input"></ion-input>-->
 
       <section>
-        <ion-button expand="block">Enviar</ion-button>
+        <ion-button expand="block"><ion-icon name="close-circle-outline"></ion-icon> Reverter Solicitação</ion-button>
+      </section>
+
+      <section>
+        <ion-button expand="block" (click)="efetuarCancelamento()">Enviar</ion-button>
       </section>
   </ion-list>
 </ion-content>

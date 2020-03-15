@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header class="ticket-no-print">
   <ion-toolbar color="#2E7D32">
     <ion-title>
       Manager RU
@@ -9,9 +9,9 @@
 <ion-content>
 
 
-  <ion-list *ngIf="aluno==null" lines="full" class="ion-no-margin ion-no-padding">
+  <ion-list class="ticket-no-print" *ngIf="aluno==null" lines="full" class="ion-no-margin ion-no-padding">
     <ion-card class="welcome-card">
-      <div class="qrcode">
+      <div class="qrcode" id="ftPrint">
         <img src="/assets/user.png" alt="" />
       </div>
 
@@ -34,15 +34,21 @@
 
   </ion-list>
 
-
-
-  <ion-fab *ngIf="aluno!=null" (click)="sair()" vertical="top" horizontal="end" slot="fixed">
+  <ion-fab *ngIf="aluno!=null" horizontal="end" vertical="top" slot="fixed" edge>
     <ion-fab-button color="light">
-      <ion-icon name="log-out"></ion-icon>
+      <ion-icon name="settings"></ion-icon>
     </ion-fab-button>
+    <ion-fab-list>
+      <ion-fab-button color="light" (click)="sair()">
+        <ion-icon name="log-out"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button color="light" (click)="imprimir()">
+        <ion-icon name="print"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
   </ion-fab>
 
-  <ion-list lines="none" *ngIf="aluno!=null">
+  <ion-list id="section-to-print" lines="none" *ngIf="aluno!=null">
     <ion-item *ngFor="let campeonato of campeonatos" (click)="selecionarCampeonato(campeonato.id)">
       <ion-label>{{campeonato.nome}}</ion-label>
       <ion-icon name="arrow-dropright"></ion-icon>
@@ -53,18 +59,12 @@
         <img src="/assets/user.png" alt="" />
       </div>
       <ion-card-header>
-        <ion-card-title><b>Nome:</b> {{aluno.nome}}</ion-card-title>
-        <ion-card-title><b>Matricula:</b> {{aluno.matricula}}</ion-card-title>
+        <ion-card-title><b class="label">Nome:</b> {{aluno.nome}}</ion-card-title>
+        <ion-card-title><b class="label">Matricula:</b> {{aluno.matricula}}</ion-card-title>
       </ion-card-header>
-
     </ion-card>
 
     <ion-list>
-      <ion-list-header>
-        <b>Identificacao:</b>
-      </ion-list-header>
-
-
       <div class="teste1">
         <ngx-qrcode [qrc-element-type]="elementType" [qrc-value]="value" qrc-class="teste1"
           qrc-errorCorrectionLevel="L">

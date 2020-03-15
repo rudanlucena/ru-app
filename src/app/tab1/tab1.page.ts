@@ -121,4 +121,8 @@ export class Tab1Page {
     this.ionViewWillEnter()
   }
 
+  imprimir(){
+    window.print()
+  }
+
 }

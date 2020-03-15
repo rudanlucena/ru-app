@@ -8,6 +8,7 @@ import { Noticia } from '../model/Noticia';
 import { Patrocinador } from '../model/Patrocinador';
 import { Confronto } from '../model/Confronto';
 import { Aluno } from '../model/Aluno';
+import { Cancelamento } from '../model/cancelamento';
 import { AuxilioTemporario } from '../model/AuxilioTemporario';
 
 @Injectable({
@@ -16,7 +17,10 @@ import { AuxilioTemporario } from '../model/AuxilioTemporario';
 export class AlunoService {
 
     private url = environment.host + "alunos"
+
     private urlSolicitacao = environment.host + "auxiliosTemporarios"
+
+    private urlCancelamento = environment.host + "cancelamentos"
 
     constructor(private http: HttpClient) { }
 
@@ -61,12 +65,17 @@ export class AlunoService {
         return await this.http.post<AuxilioTemporario>(url, auxilio).toPromise();
     }
 
-    /*
-
-    public async removerCampeonato(id:number):Promise<Campeonato> {
-        const url = `${this.url}/${id}`;
-        return await this.http.delete<Campeonato>(url).toPromise();
+    public async cancelarRefeicao(cancelamento:Cancelamento):Promise<Cancelamento> {
+        const url = `${this.urlCancelamento}`;
+        return await this.http.post<AuxilioTemporario>(url, cancelamento).toPromise();
     }
+
+    public async removerCancelamento(id:number):Promise<Cancelamento> {
+        const url = `${this.urlCancelamento}/${id}`;
+        return await this.http.delete<Cancelamento>(url).toPromise();
+    }
+
+    /*
 
     getLocalidade(cep: String): Observable<any[]>{
         return this.http.get<[]>("https://viacep.com.br/ws/"+cep+"/json/" );

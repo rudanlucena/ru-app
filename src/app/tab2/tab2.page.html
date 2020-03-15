@@ -7,21 +7,18 @@
 <ion-content>
   <ion-list>
 
-
-
-
     <ion-item>
       <ion-label>De</ion-label>
-      <ion-datetime  value="1990-02-19" placeholder="Select Date" [(ngModel)]="auxilio.inicio" ></ion-datetime>
+      <ion-datetime value="1990-02-19" placeholder="Select Date" [(ngModel)]="auxilio.inicio"></ion-datetime>
     </ion-item>
     <ion-item>
       <ion-label>Até</ion-label>
       <ion-datetime value="1990-02-20" placeholder="Select Date" [(ngModel)]="auxilio.fim"></ion-datetime>
     </ion-item>
-    
+
     <ion-item>
       <ion-label>Almoço</ion-label>
-      <ion-checkbox color="primary" [(ngModel)]="almocoChecked"  slot="start"></ion-checkbox>
+      <ion-checkbox color="primary" [(ngModel)]="almocoChecked" slot="start"></ion-checkbox>
     </ion-item>
     <ion-item>
       <ion-checkbox color="primary" [(ngModel)]="jantarChecked" slot="start"></ion-checkbox>
@@ -29,14 +26,16 @@
     </ion-item>
 
     <ion-item>
-        <ion-label>Motivo</ion-label>
-        <ion-textarea rows="6" required cols="20" placeholder="Informe aqui o motivo de sua solicitação" [(ngModel)]="auxilio.motivo"></ion-textarea>
-      </ion-item>
+      <ion-label>Motivo</ion-label>
+      <ion-textarea rows="6" required cols="20" placeholder="Informe aqui o motivo de sua solicitação"
+        [(ngModel)]="auxilio.motivo"></ion-textarea>
+    </ion-item>
 
-      <ion-input type="file" placeholder="Enter Input" [(ngModel)]="auxilio.anexo"></ion-input>
+    <!--<ion-input type="file" placeholder="Enter Input" [(ngModel)]="auxilio.anexo"></ion-input>-->
 
-      <section>
-        <ion-button type="submit" [disabled]="!jantarChecked && !almocoChecked" (click)="solicitarAuxilioTemporario()" expand="block">Enviar</ion-button>
-      </section>
+    <section>
+      <ion-button type="submit" [disabled]="!jantarChecked && !almocoChecked" (click)="solicitarAuxilioTemporario()"
+        expand="block">Enviar</ion-button>
+    </section>
   </ion-list>
 </ion-content>
