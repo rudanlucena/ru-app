@@ -5,5 +5,5 @@ export class Aluno{
     public situacao:string;
     public cota:string;
     public senha:string;
-
+    public image?:any
 }

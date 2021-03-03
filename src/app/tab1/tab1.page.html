@@ -34,35 +34,65 @@
 
   </ion-list>
 
-  <ion-fab *ngIf="aluno!=null" horizontal="end" vertical="top" slot="fixed" edge>
+  <!--<ion-fab *ngIf="aluno!=null" horizontal="end" vertical="top" slot="fixed" edge>
     <ion-fab-button color="light">
       <ion-icon name="settings"></ion-icon>
     </ion-fab-button>
     <ion-fab-list>
-      <ion-fab-button color="light" (click)="sair()">
+      <ion-fab-button color="light" >
         <ion-icon name="log-out"></ion-icon>
       </ion-fab-button>
-      <ion-fab-button color="light" (click)="imprimir()">
+      <ion-fab-button color="light">
         <ion-icon name="print"></ion-icon>
       </ion-fab-button>
     </ion-fab-list>
-  </ion-fab>
+  </ion-fab>-->
+
+  
 
   <ion-list id="section-to-print" lines="none" *ngIf="aluno!=null">
-    <ion-item *ngFor="let campeonato of campeonatos" (click)="selecionarCampeonato(campeonato.id)">
-      <ion-label>{{campeonato.nome}}</ion-label>
-      <ion-icon name="arrow-dropright"></ion-icon>
-    </ion-item>
+
+    <!--<ion-avatar class="ion-margin-start">
+      <img src="{{aluno.image}}">
+    </ion-avatar>-->
 
     <ion-card class="welcome-card">
-      <div class="qrcode">
-        <img src="/assets/user.png" alt="" />
-      </div>
-      <ion-card-header>
-        <ion-card-title><b class="label">Nome:</b> {{aluno.nome}}</ion-card-title>
-        <ion-card-title><b class="label">Matricula:</b> {{aluno.matricula}}</ion-card-title>
-      </ion-card-header>
+      <ion-item >
+        <ion-avatar class="ion-margin-start">
+          <img src="{{aluno.image}}">
+        </ion-avatar>
+        <ion-label id="xxx">
+          <h3>{{aluno.nome}}</h3>
+          <p>{{aluno.matricula}}</p>
+        </ion-label>
+      </ion-item>
     </ion-card>
+
+    <ion-grid class="ticket-no-print">
+      <ion-row>
+        <ion-col>
+          <section>
+            <ion-button (click)="imprimir()" expand="block"><ion-icon name="print"></ion-icon>Imprimir</ion-button>
+          </section>
+        </ion-col>
+        <ion-col>
+          <section>
+            <ion-button (click)="sair()" expand="block" color="danger"> <ion-icon name="log-out"></ion-icon>sair</ion-button>
+          </section>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    
+  
+
+    
+
+  
+
+    
+
+    
 
     <ion-list>
       <div class="teste1">

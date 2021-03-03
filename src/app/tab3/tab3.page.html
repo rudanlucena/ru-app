@@ -9,7 +9,6 @@
 <ion-content>
     
   <ion-list>
-
     <ion-item>
       <ion-label>De</ion-label>
       <ion-datetime value="1990-02-19" placeholder="Select Date" [(ngModel)]="cancelamento.inicio"></ion-datetime>
@@ -33,12 +32,6 @@
         <ion-label>Motivo</ion-label>
         <ion-textarea rows="6" cols="20" placeholder="Informe aqui o motivo de sua solicitação" [(ngModel)]="cancelamento.motivo"></ion-textarea>
       </ion-item>
-
-      <!--<ion-input type="file" placeholder="Enter Input"></ion-input>-->
-
-      <section>
-        <ion-button expand="block"><ion-icon name="close-circle-outline"></ion-icon> Reverter Solicitação</ion-button>
-      </section>
 
       <section>
         <ion-button expand="block" (click)="efetuarCancelamento()">Enviar</ion-button>

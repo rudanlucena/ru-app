@@ -9,13 +9,11 @@ ion-content{
 
 .welcome-card{
   background-color: #4CAF50;
-  
 }
 
 ion-card-title{
   color: white
 }
-
 
 .btn-search{
   text-align: center
@@ -33,9 +31,13 @@ ion-card-title{
 .teste1{
   text-align: center;
   
-  height: auto;
+  height: 100%;
   margin: 15px;
-  border: 3px dashed black;
+  border: 1px dashed black;
+}
+
+.teste2{
+  height: 300px;
 }
 
 @media print {
@@ -114,6 +116,10 @@ ion-card-title{
       margin:0;
       padding:0;
       line-height: 1.4em;
+      }
+
+      #img-perfil{
+        border-radius: 50%;
       }
       
   }

@@ -6,20 +6,26 @@
 
 
 <ion-content fullscreen>
-  <ion-list>
 
-    <ion-item>
+  <section class="btn-update">
+    <ion-button (click)="updateNotificatios()" size="small" color="success">Atualizar</ion-button>
+  </section>
+
+  <ion-list>
+    <ion-item *ngFor="let item of notificacoes">
       <ion-avatar slot="start">
         <ion-icon name="mail"></ion-icon>
       </ion-avatar>
       <ion-label>
-        <h2><b>Solicitação de Almoço</b></h2>
-        <h3>14/01/2019 14:14</h3>
-        <p>Infelizmente não foi possivel atender a sua solicitação devido...</p>
+        <h2><b>Solicitação de Refeição</b></h2>
+        <h3 *ngIf="item.almoco">almoco</h3>
+        <h3 *ngIf="item.jantar">jantar</h3>
+        <h3>{{item.inicio | date: 'dd/MM'}} - {{item.fim | date: 'dd/MM'}}</h3>
+        <p>{{item.status}}</p>
       </ion-label>
     </ion-item>
 
-    <ion-item>
+    <!--<ion-item>
       <ion-avatar slot="start">
         <ion-icon name="mail-open"></ion-icon>
       </ion-avatar>
@@ -28,40 +34,7 @@
         <h3>14/01/2019 14:14</h3>
         <p>Pedido efetuado com sucesso...</p>
       </ion-label>
-    </ion-item>
-
-    <ion-item>
-      <ion-avatar slot="start">
-        <ion-icon name="mail-open"></ion-icon>
-      </ion-avatar>
-      <ion-label>
-        <h2><b>Faltas Excedidas</b></h2>
-        <h3>14/01/2019 14:14</h3>
-        <p>Você excedeu o limite de faltas permitidas...</p>
-      </ion-label>
-    </ion-item>
-
-    <ion-item>
-      <ion-avatar slot="start">
-        <ion-icon name="mail-open"></ion-icon>
-      </ion-avatar>
-      <ion-label>
-        <h2><b>Cancelamento de Almoço</b></h2>
-        <h3>14/01/2019 14:14</h3>
-        <p>Pedido efetuado com sucesso...</p>
-      </ion-label>
-    </ion-item>
-
-    <ion-item>
-      <ion-avatar slot="start">
-        <ion-icon name="mail-open"></ion-icon>
-      </ion-avatar>
-      <ion-label>
-        <h2><b>Cancelamento de Almoço</b></h2>
-        <h3>14/01/2019 14:14</h3>
-        <p>Pedido efetuado com sucesso...</p>
-      </ion-label>
-    </ion-item>
+    </ion-item>-->
     
   </ion-list>
 

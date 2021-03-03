@@ -53,9 +53,12 @@ export class Tab3Page {
     this.cancelamento.aluno = this.aluno
     
     try {
+      this.cancelamento.inicio = this.cancelamento.inicio.split('T')[0];
+      this.cancelamento.fim = this.cancelamento.fim.split('T')[0];
       this.alunoService.cancelarRefeicao(this.cancelamento);
       //this.limparCampos();
       //this.aguardarSolicitacao();
+      this.aguardarSolicitacao();
     } catch (error) {
       console.log("Não foi possivel solicitar o auxilio");
     }
@@ -88,5 +91,15 @@ export class Tab3Page {
 
     await alert.present();
   }
+
+  async aguardarSolicitacao() {
+    const alert = await this.alertCtrl.create({
+      message: 'Solicitação Enviada. Para saber o status da sua solicitação entre na aba NOTIFICAÇÕES',
+      buttons: ['OK']
+    });
+
+    await alert.present();
+  }
+
 
 }

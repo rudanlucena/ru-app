@@ -10,6 +10,7 @@ import { Confronto } from '../model/Confronto';
 import { Aluno } from '../model/Aluno';
 import { Cancelamento } from '../model/cancelamento';
 import { AuxilioTemporario } from '../model/AuxilioTemporario';
+import { Notificacao } from '../model/Notificacao';
 
 @Injectable({
     providedIn: 'root'
@@ -21,6 +22,8 @@ export class AlunoService {
     private urlSolicitacao = environment.host + "auxiliosTemporarios"
 
     private urlCancelamento = environment.host + "cancelamentos"
+
+    private urlNotificacoes = environment.host + "notificacoes"
 
     constructor(private http: HttpClient) { }
 
@@ -37,6 +40,11 @@ export class AlunoService {
     public getAlunoByLogin(matricula:string, senha:string): Observable<HttpResponse<Aluno>> {
         const url = `${this.url}/${matricula}/${senha}`;
         return this.http.get<Aluno>(url, { observe: 'response' })
+    }
+
+    public getNotificacoes(id: number): Observable<HttpResponse<Notificacao[]>> {
+        const url = `${this.urlSolicitacao}/aluno/${id}`;
+        return this.http.get<Notificacao[]>(url, { observe: 'response' })
     }
 
     /*public getCampeonatoByCepAndNome(cep:string, nome:string): Observable<HttpResponse<Campeonato>> {

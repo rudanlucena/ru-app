@@ -72,10 +72,9 @@ export class Tab2Page {
     if(this.jantarChecked)
       this.auxilio.jantar = true
 
-      console.log(this.auxilio.motivo)
+       
 
     if(this.auxilio.motivo=="" || this.auxilio.inicio=="" || this.auxilio.fim==""){
-      
       this.presentAlert();
       return
     } 
@@ -84,6 +83,8 @@ export class Tab2Page {
     this.auxilio.aluno = this.aluno
     
     try {
+      this.auxilio.inicio = this.auxilio.inicio.split('T')[0];
+      this.auxilio.fim = this.auxilio.fim.split('T')[0];
       this.alunoService.solicitarAuxilioTemporario(this.auxilio);
       this.limparCampos();
       this.aguardarSolicitacao();

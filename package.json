@@ -27,9 +27,7 @@
     "@ionic-native/uid": "^5.14.0",
     "@ionic/angular": "^4.7.1",
     "angularx-qrcode": "^1.7.0-beta.5",
-    "cordova-android": "8.0.0",
-    "cordova-plugin-android-permissions": "^1.0.0",
-    "cordova-plugin-ip-mac-address": "^1.0.1",
+    "cordova-plugin-android-permissions": "^1.1.0",
     "cordova-plugin-uid": "^1.3.0",
     "core-js": "^2.5.4",
     "ngx-qrcode2": "0.0.9",
@@ -51,9 +49,11 @@
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~8.9.4",
     "codelyzer": "^5.0.0",
+    "cordova-android": "^9.0.0",
     "cordova-plugin-device": "^2.0.2",
-    "cordova-plugin-ionic-keyboard": "^2.1.3",
-    "cordova-plugin-ionic-webview": "^4.1.1",
+    "cordova-plugin-ionic-keyboard": "^2.2.0",
+    "cordova-plugin-ionic-webview": "^4.2.1",
+    "cordova-plugin-ip-mac-address": "^1.0.1",
     "cordova-plugin-splashscreen": "^5.0.2",
     "cordova-plugin-statusbar": "^2.4.2",
     "cordova-plugin-whitelist": "^1.3.3",
@@ -72,7 +72,6 @@
   "description": "An Ionic project",
   "cordova": {
     "plugins": {
-      "cordova-plugin-whitelist": {},
       "cordova-plugin-statusbar": {},
       "cordova-plugin-device": {},
       "cordova-plugin-splashscreen": {},
@@ -80,9 +79,8 @@
         "ANDROID_SUPPORT_ANNOTATIONS_VERSION": "27.+"
       },
       "cordova-plugin-ionic-keyboard": {},
-      "cordova-plugin-ip-mac-address": {},
-      "cordova-plugin-dreamover-uid": {},
-      "cordova-plugin-android-permissions": {}
+      "cordova-plugin-android-permissions": {},
+      "cordova-plugin-whitelist": {}
     },
     "platforms": [
       "android"
